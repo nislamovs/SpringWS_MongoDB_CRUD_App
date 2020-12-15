@@ -1,0 +1,10 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: characters
+      auto-index-creation: false
+
+mongodb:
+  uri: mongodb://${spring.data.mongodb.host}:${spring.data.mongodb.port}/

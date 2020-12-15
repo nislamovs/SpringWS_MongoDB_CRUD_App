@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+				  xmlns:gs="http://localhost:8082/api/v1/ws/persons">
+
+   <soapenv:Header/>
+   <soapenv:Body>
+      <gs:getPersonsRequest>
+         <gs:personId>536f710fc55b2acc61000bd1</gs:personId>
+      </gs:getPersonsRequest>
+   </soapenv:Body>
+
+</soapenv:Envelope>

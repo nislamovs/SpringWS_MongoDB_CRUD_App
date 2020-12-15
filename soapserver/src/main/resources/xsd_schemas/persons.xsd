@@ -1,0 +1,129 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://localhost:8082/api/v1/ws/persons"
+           targetNamespace="http://localhost:8082/api/v1/ws/persons"
+           elementFormDefault="qualified"
+>
+
+    <xs:element name="getPersonsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personId" type="xs:string"/>
+<!--                <xs:element name="personEmail" type="xs:string"/>-->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPersonsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="person" type="tns:person"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="person">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="surname" type="xs:string"/>
+            <xs:element name="phone" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+
+            <xs:element name="address" type="tns:address"/>
+            <xs:element name="questStatus" type="tns:questStatus"/>
+            <xs:element name="skillSet" type="tns:skillSet"/>
+            <xs:element name="stats" type="tns:stats"/>
+            <xs:element name="perksSet" type="tns:perksSet"/>
+
+            <xs:element name="createdDate" type="xs:string"/>
+            <xs:element name="createdBy" type="xs:string"/>
+            <xs:element name="modifiedDate" type="xs:string"/>
+            <xs:element name="modifiedBy" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="address">
+        <xs:sequence>
+            <xs:element name="country" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="province" type="xs:string"/>
+            <xs:element name="street" type="xs:string"/>
+            <xs:element name="postcode" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="questStatus">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+
+            <xs:element name="findJohn" type="xs:boolean"/>
+            <xs:element name="killMary" type="xs:boolean"/>
+            <xs:element name="steelCar" type="xs:boolean"/>
+            <xs:element name="casinoRobbery" type="xs:boolean"/>
+            <xs:element name="steelPainting" type="xs:boolean"/>
+
+            <xs:element name="createdDate" type="xs:string"/>
+            <xs:element name="createdBy" type="xs:string"/>
+            <xs:element name="modifiedDate" type="xs:string"/>
+            <xs:element name="modifiedBy" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="skillSet">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+
+            <xs:element name="gambling" type="xs:int"/>
+            <xs:element name="pickpocketing" type="xs:int"/>
+            <xs:element name="lockpicking" type="xs:int"/>
+            <xs:element name="technology" type="xs:int"/>
+            <xs:element name="martialArts" type="xs:int"/>
+            <xs:element name="lightWeapons" type="xs:int"/>
+            <xs:element name="heavyWeapons" type="xs:int"/>
+            <xs:element name="barter" type="xs:int"/>
+            <xs:element name="speechcraft" type="xs:int"/>
+
+            <xs:element name="createdDate" type="xs:string"/>
+            <xs:element name="createdBy" type="xs:string"/>
+            <xs:element name="modifiedDate" type="xs:string"/>
+            <xs:element name="modifiedBy" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="stats">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+
+            <xs:element name="strength" type="xs:int"/>
+            <xs:element name="endurance" type="xs:int"/>
+            <xs:element name="dexterity" type="xs:int"/>
+            <xs:element name="intellect" type="xs:int"/>
+            <xs:element name="attention" type="xs:int"/>
+            <xs:element name="personality" type="xs:int"/>
+            <xs:element name="luck" type="xs:int"/>
+
+            <xs:element name="createdDate" type="xs:string"/>
+            <xs:element name="createdBy" type="xs:string"/>
+            <xs:element name="modifiedDate" type="xs:string"/>
+            <xs:element name="modifiedBy" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="perksSet">
+        <xs:list itemType='tns:perks'/>
+    </xs:simpleType>
+
+    <xs:simpleType name="perks">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="POLICE_ALLY"/>
+            <xs:enumeration value="EXPLORER"/>
+            <xs:enumeration value="PYROMANIAC"/>
+            <xs:enumeration value="HEALER"/>
+            <xs:enumeration value="GAMBLER"/>
+            <xs:enumeration value="SCOUT"/>
+            <xs:enumeration value="MR_FIXIT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

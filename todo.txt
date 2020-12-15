@@ -1,0 +1,105 @@
+- Prepare script totalRebuild.sh                                                                                    OK
+
+- Add folder with scripts for tomcat/docker/etc                                                                     OK
+
+- Create scripts for soap testing                                                                                   --
+- Create scripts for rest testing                                                                                   --
+
+- Create database for mongodb                                                                                       OK
+
+- Find out a way how to build docker images using latest version of gradle                                           OK
+- Setup lombok in latest gradle                                                                                      OK
+- Setup mapstruct                                                                                                    OK
+
+- Add:
+
+        jaxb                                                                                                         OK
+        wsdl                                                                                                         OK
+        spring data jpa                                                                                              OK
+        mongodb                                                                                                      OK
+        mongotrek                                                                                                    OK
+
+
+Database:                                                                                                            OK
+
+    Characters:
+        persons:
+            id
+            name
+            surname
+            phone
+            email
+            address1
+                country
+                city
+                province
+                street
+                postcode
+            address2
+                country
+                city
+                province
+                street
+                postcode
+
+        skills:
+            id
+            personId
+            gambling
+            pickpocketing
+            lockpicking
+            technology
+            martialArts
+            lightWeapons
+            heavyWeapons
+
+        stats:
+            strength;
+            endurance;
+            dexterity;
+            intellect;
+            attention;
+            personality;
+            luck;
+
+        quests:
+            id
+            personId
+            findJohn
+            killMary
+            steelCar
+            casinoRobbery
+            steelPainting
+
+
+- Configuration
+
+
+- DTO                                                                                                               OK
+- DAO                                                                                                               OK
+- enums                                                                                                             OK
+- exceptions                                                                                                        OK
+- Mapstruct mappers                                                                                                 OK
+- Mongo converters                                                                                                  OK
+
+- SOAP endpoints                                                                                                    --
+- Endpoints validation                                                                                              --
+- REST Endpoints  (server)                                                                                          OK
+- REST Endpoints  (client)                                                                                          --
+- Exception handling                                                                                                OK
+
+- services                                                                                                          --
+- Mongo repositories                                                                                                OK
+
+- Add security (basic auth)                                                                                         --
+
+
+--Sources:
+
+https://www.baeldung.com/cascading-with-dbref-and-lifecycle-events-in-spring-data-mongodb
+http://mossknowledge.blogspot.com/2017/05/soap-request-from-command-line-curl.html
+https://lishman.io/object-mapping-with-spring-data-mongodb
+https://stackoverflow.com/questions/12385920/spring-mongodb-storing-retrieving-enums-as-int-not-string/30024621
+
+http://www.netkiller.cn/java/spring/data/spring-data-mongodb.html
+https://stackoverflow.com/questions/50077611/cannot-resolve-reference-to-bean-mongotemplate-while-setting-bean-property-mo

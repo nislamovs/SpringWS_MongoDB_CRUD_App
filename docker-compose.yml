@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+  soap_client:
+    container_name: "soap_client"
+    hostname: localhost
+    build:
+      context: ./soapclient/
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    volumes:
+      - "./soapclient/volumes/logs:/logs"
+
+  soap_server:
+    container_name: "soap_server"
+    hostname: localhost
+    build:
+      context: ./soapserver/
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    volumes:
+      - "./soapserver/volumes/logs:/logs"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    container_name: "mongodb"
+    image: mongo:latest
+    hostname: mongodb
+    command: mongod --port 27017
+    volumes:
+      - ./volumes/dumps:/backup
+    restart: always
+    expose:
+      - "22"
+    ports:
+      - "27017:27017"
+
+  mongoclient:
+    image: mongoclient/mongoclient:latest
+    container_name: mongoclient
+    hostname: mongoclient
+    depends_on:
+      - mongodb
+    ports:
+      - 3000:3000
+    tty: true
+    environment:
+      MONGO_URL: mongodb://mongodb:27017/characters
+
+  mongo-express:
+    container_name: mongodb-express-client
+    image: mongo-express:latest
+    environment:
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    ports:
+      - 9090:8081
+    restart: always
+    tty: true
+

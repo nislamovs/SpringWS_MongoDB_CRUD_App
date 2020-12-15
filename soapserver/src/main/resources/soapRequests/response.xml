@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+    <ns2:getPersonsResponse xmlns:ns2="http://localhost:8082/api/v1/ws/persons">
+      <ns2:person>
+        <ns2:id>ObjectId("536f710fc55b2acc61000bd1")</ns2:id>
+        <ns2:name>Vasja</ns2:name>
+        <ns2:surname>Ivanov</ns2:surname>
+        <ns2:phone>3453356684</ns2:phone>
+        <ns2:email>vasja.ivanov@inbox.lv</ns2:email>
+        <ns2:address>
+          <ns2:country>Latvia</ns2:country>
+          <ns2:city>Riga</ns2:city>
+          <ns2:province>Rigas rajons</ns2:province>
+          <ns2:street>Brivibas iela 1, 12</ns2:street>
+          <ns2:postcode>LV-5321</ns2:postcode>
+        </ns2:address>
+        <ns2:questStatus>
+          <ns2:id>ObjectId("536f710fc55b2acc61000ba1")</ns2:id>
+          <ns2:findJohn>false</ns2:findJohn>
+          <ns2:killMary>false</ns2:killMary>
+          <ns2:steelCar>false</ns2:steelCar>
+          <ns2:casinoRobbery>false</ns2:casinoRobbery>
+          <ns2:steelPainting>false</ns2:steelPainting>
+          <ns2:createdDate>2020-12-10T19:17:12.563Z</ns2:createdDate>
+          <ns2:createdBy>admin</ns2:createdBy>
+          <ns2:modifiedDate>2020-12-10T19:17:12.563Z</ns2:modifiedDate>
+          <ns2:modifiedBy>admin</ns2:modifiedBy>
+        </ns2:questStatus>
+        <ns2:skillSet>
+          <ns2:id>ObjectId("536f710fc55b2acc61000bc1")</ns2:id>
+          <ns2:gambling>123</ns2:gambling>
+          <ns2:pickpocketing>66</ns2:pickpocketing>
+          <ns2:lockpicking>86</ns2:lockpicking>
+          <ns2:technology>33</ns2:technology>
+          <ns2:martialArts>88</ns2:martialArts>
+          <ns2:lightWeapons>34</ns2:lightWeapons>
+          <ns2:heavyWeapons>17</ns2:heavyWeapons>
+          <ns2:barter>56</ns2:barter>
+          <ns2:speechcraft>11</ns2:speechcraft>
+          <ns2:createdDate>2020-12-10T19:17:12.567Z</ns2:createdDate>
+          <ns2:createdBy>admin</ns2:createdBy>
+          <ns2:modifiedDate>2020-12-10T19:17:12.567Z</ns2:modifiedDate>
+          <ns2:modifiedBy>admin</ns2:modifiedBy>
+        </ns2:skillSet>
+        <ns2:stats>
+          <ns2:id>ObjectId("536f710fc55b2acc61000bb1")</ns2:id>
+          <ns2:strength>66</ns2:strength>
+          <ns2:endurance>23</ns2:endurance>
+          <ns2:dexterity>93</ns2:dexterity>
+          <ns2:intellect>12</ns2:intellect>
+          <ns2:attention>83</ns2:attention>
+          <ns2:personality>74</ns2:personality>
+          <ns2:luck>12</ns2:luck>
+          <ns2:createdDate>2020-12-10T19:17:12.571Z</ns2:createdDate>
+          <ns2:createdBy>admin</ns2:createdBy>
+          <ns2:modifiedDate>2020-12-10T19:17:12.571Z</ns2:modifiedDate>
+          <ns2:modifiedBy>admin</ns2:modifiedBy>
+        </ns2:stats>
+        <ns2:perksSet/>
+        <ns2:createdDate>2020-12-10 19:17:12</ns2:createdDate>
+        <ns2:createdBy>admin</ns2:createdBy>
+        <ns2:modifiedDate>2020-12-10 19:17:12</ns2:modifiedDate>
+        <ns2:modifiedBy>admin</ns2:modifiedBy>
+      </ns2:person>
+    </ns2:getPersonsResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

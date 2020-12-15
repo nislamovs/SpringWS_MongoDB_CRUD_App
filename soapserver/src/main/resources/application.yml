@@ -1,0 +1,34 @@
+server:
+  port: 8082
+
+application:
+  developer: Nizami Islamovs
+  version: v 1.0.0
+  deploymentdate: 2018-09-11 21:15:29
+  support.email: nizamiislamovs@gmail.com
+  description: SOAP server mcs
+  title: SOAP server mcs
+
+  property:
+    mongotrek:
+      script:
+        path: "migration/mongotrek.yml"
+      changelog:
+        collection:
+          name: "mongotrek_changelog"
+
+#spring:
+#  data:
+#    mongodb:
+#      host: localhost
+#      port: 27017
+#      database: characters
+#      auto-index-creation: false
+#      uri: mongodb://${spring.data.mongodb.host}:${spring.data.mongodb.port}/
+
+logging:
+  level:
+    com.soap.soapserver: INFO
+    org:
+      springframework:
+        ws: DEBUG

@@ -1,0 +1,23 @@
+package com.soap.soapserver.domain.dto;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import java.time.Instant;
+
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder(toBuilder = true)
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class StatsUpdatedDTO extends AbstractDTO {
+
+    private String email;
+    private String newValue;
+}

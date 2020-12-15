@@ -1,0 +1,187 @@
+migrations:
+    - version: 1.0.0
+      description: initialization - create persons schema
+      author: admin
+      command: { create: "persons" }
+
+    - version: 1.0.1
+      description: initialization - create quests schema
+      author: admin
+      command: { create: "quests" }
+
+    - version: 1.0.2
+      description: initialization - create skills schema
+      author: admin
+      command: { create: "skills" }
+
+    - version: 1.0.3
+      description: initialization - create stats schema
+      author: admin
+      command: { create: "stats" }
+
+    - version: 1.1.0
+      description: initialization - populate persons data
+      author: admin
+      command: {
+        insert: "persons",
+        documents: [
+            { _id: ObjectId("536f710fc55b2acc61000bd1"),  name: "Vasja",    surname: "Ivanov",     phone: "3453356684",   email: "vasja.ivanov@inbox.lv",         address: {country: "Latvia",    city: "Riga",      province: "Rigas rajons",       street: "Brivibas iela 1, 12",               postcode: "LV-5321"},   questStatus: ObjectId("536f710fc55b2acc61000ba1"),   stats: ObjectId("536f710fc55b2acc61000bb1"),   skillSet: ObjectId("536f710fc55b2acc61000bc1"),    perkSet: ["POLICE_ALLY", "MR_FIXIT"]   },
+            { _id: ObjectId("536f710fc55b2acc61000bd2"),  name: "Petja",    surname: "Petrov",     phone: "3546345665",   email: "petja.petrov@gmail.com",        address: {country: "Lithuania", city: "Vilnius",   province: "Central",            street: "Shaulai street 12, 64",             postcode: "VH4825"},    questStatus: ObjectId("536f710fc55b2acc61000ba2"),   stats: ObjectId("536f710fc55b2acc61000bb2"),   skillSet: ObjectId("536f710fc55b2acc61000bc2"),    perkSet: ["MR_FIXIT", "SCOUT"]   },
+            { _id: ObjectId("536f710fc55b2acc61000bd3"),  name: "Kolja",    surname: "Sidorov",    phone: "3563546766",   email: "kolja.sidorov@inbox.lv",        address: {country: "Russia",    city: "Moscow",    province: "Super",              street: "Ulica Sovetskaja 55,33",            postcode: "N7876343"},  questStatus: ObjectId("536f710fc55b2acc61000ba3"),   stats: ObjectId("536f710fc55b2acc61000bb3"),   skillSet: ObjectId("536f710fc55b2acc61000bc3"),    perkSet: ["EXPLORER"]   },
+            { _id: ObjectId("536f710fc55b2acc61000bd4"),  name: "Sasha",    surname: "Fedorov",    phone: "2345267657",   email: "sasha.fedorov@yahoo.com",       address: {country: "USA",       city: "New-York",  province: "Awesome",            street: "Washington street 53-32",           postcode: "ERB4564"},   questStatus: ObjectId("536f710fc55b2acc61000ba4"),   stats: ObjectId("536f710fc55b2acc61000bb4"),   skillSet: ObjectId("536f710fc55b2acc61000bc4"),    perkSet: ["HEALER"]   },
+            { _id: ObjectId("536f710fc55b2acc61000bd5"),  name: "Kostja",   surname: "Konev",      phone: "3455645645",   email: "kostja.konev@amazon.ca",        address: {country: "Canada",    city: "Toronto",   province: "Domestic",           street: "Cnaadian street 35, 78",            postcode: "45745745"},  questStatus: ObjectId("536f710fc55b2acc61000ba5"),   stats: ObjectId("536f710fc55b2acc61000bb5"),   skillSet: ObjectId("536f710fc55b2acc61000bc5"),    perkSet: ["GAMBLER", "SCOUT"]   },
+            { _id: ObjectId("536f710fc55b2acc61000bd6"),  name: "Janis",    surname: "Jansons",    phone: "5756756765",   email: "janis.jansons@mail.ru",         address: {country: "Ukraine",   city: "Odessa",    province: "Near sea",           street: "Ulica Bogdana Hmelnickogo 13, 55",  postcode: "BN5NTY5"},   questStatus: ObjectId("536f710fc55b2acc61000ba6"),   stats: ObjectId("536f710fc55b2acc61000bb6"),   skillSet: ObjectId("536f710fc55b2acc61000bc6"),    perkSet: ["EXPLORER", "POLICE_ALLY"]   },
+            { _id: ObjectId("536f710fc55b2acc61000bd7"),  name: "Peteris",  surname: "Petersons",  phone: "2342434534",   email: "peteris.peteresons@yahoo.com",  address: {country: "Estonia",   city: "Tallin",    province: "Foggy",              street: "Tallin street 64, 32",              postcode: "ETRYN56"},   questStatus: ObjectId("536f710fc55b2acc61000ba7"),   stats: ObjectId("536f710fc55b2acc61000bb7"),   skillSet: ObjectId("536f710fc55b2acc61000bc7"),    perkSet: ["GAMBLER"]   },
+            { _id: ObjectId("536f710fc55b2acc61000bd8"),  name: "Ansis",    surname: "Krumins",    phone: "2342342344",   email: "ansis.krumins@gmail.com",       address: {country: "Sweden",    city: "Stockholm", province: "Fantastish",         street: "Industrial street 23, 66",          postcode: "3B453F4"},   questStatus: ObjectId("536f710fc55b2acc61000ba8"),   stats: ObjectId("536f710fc55b2acc61000bb8"),   skillSet: ObjectId("536f710fc55b2acc61000bc8"),    perkSet: ["PYROMANIAC"]   },
+            { _id: ObjectId("536f710fc55b2acc61000bd9"),  name: "Karlis",   surname: "Berzins",    phone: "3457562456",   email: "karlis.berzins@inbox.lv",       address: {country: "France",    city: "Paris",     province: "Channel 666",        street: "Bastilia street 53,77",             postcode: "DD7DFDF"},   questStatus: ObjectId("536f710fc55b2acc61000ba9"),   stats: ObjectId("536f710fc55b2acc61000bb9"),   skillSet: ObjectId("536f710fc55b2acc61000bc9"),    perkSet: ["HEALER"]   },
+            { _id: ObjectId("536f710fc55b2acc61000bda"),  name: "Valters",  surname: "Locmelis",   phone: "5675673453",   email: "valters.locmelis@yandex.ru",    address: {country: "UK",        city: "London",    province: "Chinese district",   street: "Northampton 54, 78",                postcode: "234GH"},     questStatus: ObjectId("536f710fc55b2acc61000baa"),   stats: ObjectId("536f710fc55b2acc61000bba"),   skillSet: ObjectId("536f710fc55b2acc61000bca"),    perkSet: ["PYROMANIAC"]   }
+        ]
+      }
+
+    - version: 1.1.1
+      description: update processing - add createdBy, createdDate, modifiedBy, modifiedDate fields
+      author: admin
+      command: {
+        update: "persons",
+        updates: [
+        {
+          q: { },
+          u: {
+            $currentDate: {
+              "createdDate": { $type: "date" },
+              "modifiedDate": { $type: "date"}
+            },
+            $set: {
+              createdBy: "admin",
+              modifiedBy: "admin"
+            }
+          },
+          multi: true
+        }
+        ]
+      }
+
+    - version: 1.2.0
+      description: initialization - populate quest status data
+      author: admin
+      command: {
+        insert: "quests",
+        documents: [
+        { _id: ObjectId("536f710fc55b2acc61000ba1"), findJohn: false, killMary: false, steelCar: false, casinoRobbery: false, steelPainting: false },
+        { _id: ObjectId("536f710fc55b2acc61000ba2"), findJohn: true, killMary: false, steelCar: false, casinoRobbery: true, steelPainting: false },
+        { _id: ObjectId("536f710fc55b2acc61000ba3"), findJohn: false, killMary: false, steelCar: false, casinoRobbery: false, steelPainting: false },
+        { _id: ObjectId("536f710fc55b2acc61000ba4"), findJohn: false, killMary: true, steelCar: false, casinoRobbery: true, steelPainting: false },
+        { _id: ObjectId("536f710fc55b2acc61000ba5"), findJohn: false, killMary: false, steelCar: false, casinoRobbery: false, steelPainting: false },
+        { _id: ObjectId("536f710fc55b2acc61000ba6"), findJohn: true, killMary: false, steelCar: true, casinoRobbery: false, steelPainting: false },
+        { _id: ObjectId("536f710fc55b2acc61000ba7"), findJohn: false, killMary: false, steelCar: false, casinoRobbery: false, steelPainting: true },
+        { _id: ObjectId("536f710fc55b2acc61000ba8"), findJohn: false, killMary: false, steelCar: false, casinoRobbery: true, steelPainting: true },
+        { _id: ObjectId("536f710fc55b2acc61000ba9"), findJohn: false, killMary: true, steelCar: false, casinoRobbery: false, steelPainting: false },
+        { _id: ObjectId("536f710fc55b2acc61000baa"), findJohn: true, killMary: false, steelCar: false, casinoRobbery: false, steelPainting: true }
+        ]
+      }
+
+    - version: 1.2.1
+      description: update processing - add createdBy, createdDate, modifiedBy, modifiedDate fields
+      author: admin
+      command: {
+        update: "quests",
+        updates: [
+        {
+          q: { },
+          u: {
+            $currentDate: {
+              "createdDate": { $type: "date" },
+              "modifiedDate": { $type: "date"}
+            },
+            $set: {
+              createdBy: "admin",
+              modifiedBy: "admin"
+            }
+          },
+          multi: true
+        }
+        ]
+      }
+
+    - version: 1.3.0
+      description: initialization - populate skill set data
+      author: admin
+      command: {
+        insert: "skills",
+        documents: [
+        { _id: ObjectId("536f710fc55b2acc61000bc1"), gambling: 123, pickpocketing: 66, lockpicking: 86, technology: 33, martialArts: 88, lightWeapons: 34, heavyWeapons: 17, barter: 56, speechcraft: 11 },
+        { _id: ObjectId("536f710fc55b2acc61000bc2"), gambling: 123, pickpocketing: 66, lockpicking: 86, technology: 33, martialArts: 88, lightWeapons: 32, heavyWeapons: 17, barter: 56, speechcraft: 11 },
+        { _id: ObjectId("536f710fc55b2acc61000bc3"), gambling: 42, pickpocketing: 22, lockpicking: 86, technology: 33, martialArts: 88, lightWeapons: 32, heavyWeapons: 17, barter: 53, speechcraft: 11 },
+        { _id: ObjectId("536f710fc55b2acc61000bc4"), gambling: 123, pickpocketing: 66, lockpicking: 86, technology: 24, martialArts: 88, lightWeapons: 32, heavyWeapons: 17, barter: 56, speechcraft: 11 },
+        { _id: ObjectId("536f710fc55b2acc61000bc5"), gambling: 23, pickpocketing: 66, lockpicking: 86, technology: 33, martialArts: 88, lightWeapons: 12, heavyWeapons: 17, barter: 56, speechcraft: 11 },
+        { _id: ObjectId("536f710fc55b2acc61000bc6"), gambling: 123, pickpocketing: 66, lockpicking: 86, technology: 33, martialArts: 88, lightWeapons: 32, heavyWeapons: 17, barter: 56, speechcraft: 11 },
+        { _id: ObjectId("536f710fc55b2acc61000bc7"), gambling: 31, pickpocketing: 66, lockpicking: 86, technology: 33, martialArts: 66, lightWeapons: 32, heavyWeapons: 17, barter: 56, speechcraft: 11 },
+        { _id: ObjectId("536f710fc55b2acc61000bc8"), gambling: 123, pickpocketing: 35, lockpicking: 86, technology: 33, martialArts: 88, lightWeapons: 32, heavyWeapons: 17, barter: 56, speechcraft: 11 },
+        { _id: ObjectId("536f710fc55b2acc61000bc9"), gambling: 86, pickpocketing: 66, lockpicking: 86, technology: 33, martialArts: 88, lightWeapons: 32, heavyWeapons: 17, barter: 56, speechcraft: 11 },
+        { _id: ObjectId("536f710fc55b2acc61000bca"), gambling: 123, pickpocketing: 66, lockpicking: 86, technology: 33, martialArts: 88, lightWeapons: 78, heavyWeapons: 17, barter: 56, speechcraft: 11 }
+        ]
+      }
+
+    - version: 1.3.1
+      description: update processing - add createdBy, createdDate, modifiedBy, modifiedDate fields
+      author: admin
+      command: {
+        update: "skills",
+        updates: [
+        {
+          q: { },
+          u: {
+            $currentDate: {
+              "createdDate": { $type: "date" },
+              "modifiedDate": { $type: "date"}
+            },
+            $set: {
+              createdBy: "admin",
+              modifiedBy: "admin"
+            }
+          },
+          multi: true
+        }
+        ]
+      }
+    - version: 1.4.0
+      description: initialization - populate stats data
+      author: admin
+      command: {
+        insert: "stats",
+        documents: [
+        { _id: ObjectId("536f710fc55b2acc61000bb1"), strength: 66, endurance: 23, dexterity: 93, intellect: 12, attention: 83, personality: 74, luck: 12 },
+        { _id: ObjectId("536f710fc55b2acc61000bb2"), strength: 66, endurance: 23, dexterity: 93, intellect: 12, attention: 83, personality: 74, luck: 12 },
+        { _id: ObjectId("536f710fc55b2acc61000bb3"), strength: 66, endurance: 23, dexterity: 93, intellect: 12, attention: 83, personality: 74, luck: 12 },
+        { _id: ObjectId("536f710fc55b2acc61000bb4"), strength: 66, endurance: 23, dexterity: 93, intellect: 12, attention: 83, personality: 74, luck: 12 },
+        { _id: ObjectId("536f710fc55b2acc61000bb5"), strength: 66, endurance: 23, dexterity: 93, intellect: 12, attention: 83, personality: 74, luck: 12 },
+        { _id: ObjectId("536f710fc55b2acc61000bb6"), strength: 66, endurance: 23, dexterity: 93, intellect: 12, attention: 83, personality: 74, luck: 12 },
+        { _id: ObjectId("536f710fc55b2acc61000bb7"), strength: 66, endurance: 23, dexterity: 93, intellect: 12, attention: 83, personality: 74, luck: 12 },
+        { _id: ObjectId("536f710fc55b2acc61000bb8"), strength: 66, endurance: 23, dexterity: 93, intellect: 12, attention: 83, personality: 74, luck: 12 },
+        { _id: ObjectId("536f710fc55b2acc61000bb9"), strength: 66, endurance: 23, dexterity: 93, intellect: 12, attention: 83, personality: 74, luck: 12 },
+        { _id: ObjectId("536f710fc55b2acc61000bba"), strength: 66, endurance: 23, dexterity: 93, intellect: 12, attention: 83, personality: 74, luck: 12 }
+        ]
+      }
+
+    - version: 1.4.1
+      description: update processing - add createdBy, createdDate, modifiedBy, modifiedDate fields
+      author: admin
+      command: {
+        update: "stats",
+        updates: [
+        {
+          q: { },
+          u: {
+            $currentDate: {
+              "createdDate": { $type: "date" },
+              "modifiedDate": { $type: "date"}
+            },
+            $set: {
+              createdBy: "admin",
+              modifiedBy: "admin"
+            }
+          },
+          multi: true
+        }
+        ]
+      }
