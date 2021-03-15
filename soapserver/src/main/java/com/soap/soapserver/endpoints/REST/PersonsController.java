@@ -6,6 +6,7 @@ import com.soap.soapserver.domain.dto.PersonDTO;
 import com.soap.soapserver.domain.dto.PersonDefaultResponseDTO;
 import com.soap.soapserver.services.PersonService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import static java.time.Instant.now;
 import static org.springframework.data.domain.PageRequest.of;
 import static org.springframework.http.ResponseEntity.ok;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("api/v1/rest")

@@ -1,6 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:tns="http://localhost:8082/api/v1/ws/persons"
-           targetNamespace="http://localhost:8082/api/v1/ws/persons"
+           xmlns:tns="https://localhost:8443/api/v1/ws/persons"
+           targetNamespace="https://localhost:8443/api/v1/ws/persons"
            elementFormDefault="qualified"
 >
 

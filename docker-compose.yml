@@ -1,29 +1,29 @@
 version: '3'
 
 services:
-  soap_client:
-    container_name: "soap_client"
-    hostname: localhost
-    build:
-      context: ./soapclient/
-      dockerfile: Dockerfile
-    ports:
-      - "8081:8080"
-    volumes:
-      - "./soapclient/volumes/logs:/logs"
-
-  soap_server:
-    container_name: "soap_server"
-    hostname: localhost
-    build:
-      context: ./soapserver/
-      dockerfile: Dockerfile
-    ports:
-      - "8082:8080"
-    volumes:
-      - "./soapserver/volumes/logs:/logs"
-    depends_on:
-      - mongodb
+#  soap_client:
+#    container_name: "soap_client"
+#    hostname: localhost
+#    build:
+#      context: ./soapclient/
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8081:8080"
+#    volumes:
+#      - "./soapclient/volumes/logs:/logs"
+#
+#  soap_server:
+#    container_name: "soap_server"
+#    hostname: localhost
+#    build:
+#      context: ./soapserver/
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8443:8443"
+#    volumes:
+#      - "./soapserver/volumes/logs:/logs"
+#    depends_on:
+#      - mongodb
 
   mongodb:
     container_name: "mongodb"

@@ -2,14 +2,16 @@ package com.soap.soapclient.services;
 
 import com.soap.soapclient.wsdl.GetPersonsRequest;
 import com.soap.soapclient.wsdl.GetPersonsResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
 
-@Service
 @Slf4j
+@RequiredArgsConstructor
+@Service
 public class SkillsClient extends WebServiceGatewaySupport {
 
     private final String PATH_PREFIX = "/api/v1/ws/persons";

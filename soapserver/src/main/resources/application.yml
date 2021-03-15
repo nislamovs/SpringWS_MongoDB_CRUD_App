@@ -1,5 +1,13 @@
 server:
-  port: 8082
+  port: 8443
+  ssl:
+    client-auth: want                                   #need is default
+    key-store: classpath:keystore.jks
+    key-store-password: password
+    #    key-alias: ca
+    key-password: password
+    trust-store: classpath:truststore.jks
+    trust-store-password: password
 
 application:
   developer: Nizami Islamovs
@@ -32,3 +40,6 @@ logging:
     org:
       springframework:
         ws: DEBUG
+
+client.soap.ws.pathPrefix: /api/v1/ws
+client.soap.ws.targetNamespace: https://localhost:8443${client.soap.ws.pathPrefix}

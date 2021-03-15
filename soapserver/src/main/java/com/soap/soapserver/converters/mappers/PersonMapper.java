@@ -2,7 +2,7 @@ package com.soap.soapserver.converters.mappers;
 
 import com.soap.soapserver.domain.dto.PersonDTO;
 import com.soap.soapserver.models.PersonDAO;
-import localhost._8082.api.v1.ws.persons.Person;
+import https.localhost._8443.api.v1.ws.persons.Person;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 

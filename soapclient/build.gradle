@@ -23,9 +23,18 @@ repositories {
 
 // tag::wsdl[]
 task genJaxb {
+
+	System.setProperty('javax.net.ssl.keyStoreType', 'pkcs12')
+	System.setProperty('javax.net.ssl.keyStore', "${projectDir}/src/main/resources/clientWs.p12")
+	System.setProperty('javax.net.ssl.keyStorePassword', 'password')
+	System.setProperty('javax.net.ssl.keyPassword', 'password')
+	System.setProperty('javax.net.ssl.trustStore', "${projectDir}/src/main/resources/truststore.jks")
+	System.setProperty('javax.net.ssl.trustStorePassword', 'password')
+	System.setProperty('sun.security.ssl.allowUnsafeRenegotiation','true')
+
 	ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
 	ext.classesDir = "${buildDir}/classes/jaxb"
-	ext.schema = "http://localhost:8082/api/v1/ws/persons/persons.wsdl"
+	ext.schema = "https://localhost:8443/api/v1/ws/persons/persons.wsdl"
 
 	outputs.dir classesDir
 
@@ -79,6 +88,7 @@ dependencies {
 
 //	implementation 			'wsdl4j:wsdl4j'
 	implementation 			'org.springframework.ws:spring-ws-core'
+	implementation 			'org.apache.httpcomponents:httpclient:4.5.4'
 
 	//Fixing "Implementation of JAXB-API has not been found on module path or classpath." error.
 	compile('javax.xml.bind:jaxb-api:2.3.0')
