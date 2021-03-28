@@ -47,19 +47,20 @@ public class PersonsController {
                           : ok(personMapper.toDTO(personService.retrievePartialPersonInfoByEmail(personEmail)));
     }
 
-    @GetMapping("/persons/all")
-    public ResponseEntity<?> getPersonsList(@RequestParam("page") @NotBlank int page,
-                                            @RequestParam("size") @NotBlank int size ) {
-
-        return ok(personService.retrievePersonList(page, size).stream().map(personMapper::toDTO).collect(Collectors.toList()));
-    }
+//    @GetMapping("/persons/all")
+//    public ResponseEntity<?> getPersonsList(@RequestParam("page") @NotBlank int page,
+//                                            @RequestParam("size") @NotBlank int size ) {
+//
+//        return ok(personService.retrievePersonList(page, size).stream().map(personMapper::toDTO).collect(Collectors.toList()));
+//    }
 
     @GetMapping("/persons")
     public ResponseEntity<?> getPersonByNameAndSurname(@RequestParam("firstname") @NotBlank String firstname,
-                                                       @RequestParam("lastname") @NotBlank String lastname ) {
+                                                       @RequestParam("lastname") @NotBlank String lastname,
+                                                       @RequestParam(value = "fullInfo", defaultValue = "false") @NotBlank boolean isFullInfo) {
 
-//        return ok(personMapper.toDTO(personService.retrievePersonByNameSurname(firstname, lastname)));
-        return ok("");
+        return isFullInfo ? ok(personMapper.toDTO(personService.retrieveFullPersonInfoByNameSurname(firstname, lastname)))
+                          : ok(personMapper.toDTO(personService.retrievePartialPersonInfoByNameSurname(firstname, lastname)));
     }
 
     @PostMapping("/persons")

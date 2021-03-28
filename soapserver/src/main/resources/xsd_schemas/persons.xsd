@@ -37,6 +37,24 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="getPartialPersonByNameSurnameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personName" type="xs:string"/>
+                <xs:element name="personSurname" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getFullPersonByNameSurnameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personName" type="xs:string"/>
+                <xs:element name="personSurname" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <!--    Responses-->
 
     <xs:element name="getFullPersonResponse">

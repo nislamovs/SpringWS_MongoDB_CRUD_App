@@ -9,85 +9,108 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import org.springframework.ws.soap.addressing.server.annotation.Action;
-import org.springframework.ws.soap.server.endpoint.annotation.SoapHeader;
 
 @Endpoint
 @RequiredArgsConstructor
 @Slf4j
 public class PersonsEndpoint {
 
-//	private static final String NAMESPACE_URI = "https://localhost:8082/api/v1/ws/persons";
-	private static final String NAMESPACE_URI = "https://localhost:8443/api/v1/ws/persons";
+    //	private static final String NAMESPACE_URI = "https://localhost:8082/api/v1/ws/persons";
+    private static final String NAMESPACE_URI = "https://localhost:8443/api/v1/ws/persons";
 
-	private final PersonService personService;
-	private final PersonMapper personMapper;
+    private final PersonService personService;
+    private final PersonMapper personMapper;
 
-	//https://localhost:8443/api/v1/ws/persons/}getFullPersonByIdRequest
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPartialPersonByIdRequest")
+    public GetPartialPersonResponse getPartialPersonInfoById(@RequestPayload GetPartialPersonByIdRequest request) {
 
-	@ResponsePayload
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPartialPersonByIdRequest")
-	public GetPartialPersonResponse getPartialPersonInfoById(@RequestPayload GetPartialPersonByIdRequest request) {
+        GetPartialPersonResponse response = new GetPartialPersonResponse();
+        response.setPerson(
+                personMapper.simplify(
+                        personMapper.toSoapDTO(
+                                personService.retrievePartialPersonInfoById(request.getPersonId())
+                        )
+                )
+        );
 
-		GetPartialPersonResponse response = new GetPartialPersonResponse();
-		response.setPerson(
-			personMapper.simplify(
-				personMapper.toSoapDTO(
-					personService.retrievePartialPersonInfoById(request.getPersonId())
-				)
-			)
-		);
+        return response;
+    }
 
-		System.out.println(response.getPerson().toString());
-		return response;
-	}
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFullPersonByIdRequest")
+    public GetFullPersonResponse getFullPersonInfoById(@RequestPayload GetFullPersonByIdRequest request) {
 
-	@ResponsePayload
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFullPersonByIdRequest")
-	public GetFullPersonResponse getFullPersonInfoById(@RequestPayload GetFullPersonByIdRequest request) {
+        GetFullPersonResponse response = new GetFullPersonResponse();
+        response.setPerson(
+                personMapper.toSoapDTO(
+                        personService.retrieveFullPersonInfoById(request.getPersonId())
+                )
+        );
 
-		GetFullPersonResponse response = new GetFullPersonResponse();
-		response.setPerson(
-			personMapper.toSoapDTO(
-				personService.retrieveFullPersonInfoById(request.getPersonId())
-			)
-		);
+        return response;
+    }
 
-		System.out.println(response.getPerson().toString());
-		return response;
-	}
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPartialPersonByEmailRequest")
+    public GetPartialPersonResponse getPartialPersonInfoByEmail(@RequestPayload GetPartialPersonByEmailRequest request) {
 
-	@ResponsePayload
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPartialPersonByEmailRequest")
-	public GetPartialPersonResponse getPartialPersonInfoByEmail(@RequestPayload GetPartialPersonByEmailRequest request) {
+        GetPartialPersonResponse response = new GetPartialPersonResponse();
+        response.setPerson(
+                personMapper.simplify(
+                        personMapper.toSoapDTO(
+                                personService.retrievePartialPersonInfoByEmail(request.getPersonEmail())
+                        )
+                )
+        );
 
-		GetPartialPersonResponse response = new GetPartialPersonResponse();
-		response.setPerson(
-			personMapper.simplify(
-				personMapper.toSoapDTO(
-					personService.retrievePartialPersonInfoByEmail(request.getPersonEmail())
-				)
-			)
-		);
+        return response;
+    }
 
-		System.out.println(response.getPerson().toString());
-		return response;
-	}
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFullPersonByEmailRequest")
+    public GetFullPersonResponse getFullPersonInfoByEmail(@RequestPayload GetFullPersonByEmailRequest request) {
 
-	@ResponsePayload
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFullPersonByEmailRequest")
-	public GetFullPersonResponse getFullPersonInfoByEmail(@RequestPayload GetFullPersonByEmailRequest request) {
+        GetFullPersonResponse response = new GetFullPersonResponse();
+        response.setPerson(
+                personMapper.toSoapDTO(
+                        personService.retrieveFullPersonInfoByEmail(request.getPersonEmail())
+                )
+        );
 
-		GetFullPersonResponse response = new GetFullPersonResponse();
-		response.setPerson(
-			personMapper.toSoapDTO(
-				personService.retrieveFullPersonInfoByEmail(request.getPersonEmail())
-			)
-		);
+        return response;
+    }
 
-		System.out.println(response.getPerson().toString());
-		return response;
-	}
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPartialPersonByNameSurnameRequest")
+    public GetPartialPersonResponse getPartialPersonInfoByNameSurname(@RequestPayload GetPartialPersonByNameSurnameRequest request) {
+
+        GetPartialPersonResponse response = new GetPartialPersonResponse();
+        response.setPerson(
+                personMapper.simplify(
+                        personMapper.toSoapDTO(
+                                personService.retrievePartialPersonInfoByNameSurname(request.getPersonName(), request.getPersonSurname())
+                        )
+                )
+        );
+
+        return response;
+    }
+
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFullPersonByNameSurnameRequest")
+    public GetFullPersonResponse getFullPersonInfoByNameSurname(@RequestPayload GetFullPersonByNameSurnameRequest request) {
+
+        GetFullPersonResponse response = new GetFullPersonResponse();
+        response.setPerson(
+                personMapper.toSoapDTO(
+                        personService.retrieveFullPersonInfoByNameSurname(request.getPersonName(), request.getPersonSurname())
+                )
+        );
+
+        return response;
+    }
+
 
 
 //

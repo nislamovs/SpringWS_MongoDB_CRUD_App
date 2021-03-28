@@ -88,9 +88,10 @@ Database:                                                                       
 
 - SOAP endpoints                                                                                                    --
 - Endpoints validation                                                                                              --
-- REST Endpoints  (server)                                                                                          OK
+- REST Endpoints  (server)                                                                                          --
 - REST Endpoints  (client)                                                                                          --
-- Exception handling                                                                                                OK
+- Exception handling  (REST)                                                                                        --
+- Exception handling  (SOAP)                                                                                        --
 
 - services                                                                                                          --
 - Mongo repositories                                                                                                OK
@@ -98,15 +99,15 @@ Database:                                                                       
 - Add security (basic auth)                                                                                         --
 
 -Add scripts for keys generation for server and client                                                              --
-move webserviceTemplate as a bean to configuration and create method for usage in client Service
+move webserviceTemplate as a bean to configuration and create method for usage in client Service                    --
 
 Test this :
 
 - @Action soap annotation
 - @SoapHeader
 
--- rename short to partial
--- create validation for rest dto's
+-- create validation for rest dto's (@Valid)
+-- create search in db ignoring case
 
 --Sources:
 

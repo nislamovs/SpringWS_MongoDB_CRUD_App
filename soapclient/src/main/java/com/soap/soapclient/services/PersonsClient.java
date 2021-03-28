@@ -73,4 +73,32 @@ public class PersonsClient extends WebServiceGatewaySupport {
 
         return response.getPerson();
     }
+
+    public PersonPartial getPartialPersonInfoByNameSurname(String name, String surname) {
+
+        GetPartialPersonByNameSurnameRequest request = new GetPartialPersonByNameSurnameRequest();
+        request.setPersonName(name);
+        request.setPersonSurname(surname);
+
+        GetPartialPersonResponse response = (GetPartialPersonResponse) webServiceTemplate.marshalSendAndReceive(
+                TARGET_NAMESPACE_PREFIX,
+                request,
+                new SoapActionCallback(TARGET_NAMESPACE_PREFIX + "GetPartialPersonByNameSurnameRequest"));
+
+        return response.getPerson();
+    }
+
+    public PersonFull getFullPersonInfoByNameSurname(String name, String surname) {
+
+        GetFullPersonByNameSurnameRequest request = new GetFullPersonByNameSurnameRequest();
+        request.setPersonName(name);
+        request.setPersonSurname(surname);
+
+        GetFullPersonResponse response = (GetFullPersonResponse) webServiceTemplate.marshalSendAndReceive(
+                TARGET_NAMESPACE_PREFIX,
+                request,
+                new SoapActionCallback(TARGET_NAMESPACE_PREFIX + "GetFullPersonByNameSurnameRequest"));
+
+        return response.getPerson();
+    }
 }

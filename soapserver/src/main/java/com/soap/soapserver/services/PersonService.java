@@ -56,11 +56,22 @@ public class PersonService {
     }
 
     @Transactional(readOnly = true)
-    public PersonDAO retrieveFullPersonInfoList(String firstname, String lastname) {
-        return personRepository.findPersonByNameAndSurname(firstname, lastname)
+    public Page<PersonDAO> retrieveFullPersonInfoList(int page, int size) {
+        return personRepository.findAll(of(page, size));
+    }
+
+    @Transactional(readOnly = true)
+    public PersonDAO retrievePartialPersonInfoByNameSurname(String firstname, String lastname) {
+        return personRepository.findPartialPersonInfoByNameAndSurname(firstname, lastname)
                 .orElseThrow(() -> new PersonNotFoundException(format("Person by name, surname '%s, %s' was not found", firstname, lastname)));
     }
 
+    @Transactional(readOnly = true)
+    public PersonDAO retrieveFullPersonInfoByNameSurname(String firstname, String lastname) {
+        return personRepository.findFullPersonInfoByNameAndSurname(firstname, lastname)
+                .orElseThrow(() -> new PersonNotFoundException(format("Person by name, surname '%s, %s' was not found", firstname, lastname)));
+    }
+    ///////////////////////
 
 
 

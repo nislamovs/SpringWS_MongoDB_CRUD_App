@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotBlank;
 import javax.websocket.server.PathParam;
 
+import java.util.stream.Collectors;
+
 import static java.time.Instant.now;
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -43,17 +45,23 @@ public class PersonsController {
 ////////////////////
 //    @GetMapping("/persons")
 //    public ResponseEntity<?> getPersonsList(@RequestParam("page") @NotBlank int page,
-//                                            @RequestParam("size") @NotBlank int size) {
+//                                            @RequestParam("size") @NotBlank int size,
+//                                            @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFull) {
 //
-//        return ok(personService.getPersonList(page, size).stream().map(personMapper::toDTO).collect(Collectors.toList()));
+//        return (isFull) ? ok(personService.getFullPersonInfoList(page, size).stream().map(personMapper::toDTO).collect(Collectors.toList()))
+//                        : ok(personService.getPartialPersonInfoList(page, size).stream().map(personMapper::toDTO).collect(Collectors.toList()));
+//
+//        return
 //    }
-//
-//    @GetMapping("/persons")
-//    public ResponseEntity<?> getPersonByNameAndSurname(@RequestParam("firstname") @NotBlank String firstname,
-//                                                       @RequestParam("lastname") @NotBlank String lastname) {
-//
-//        return ok(personMapper.toRestDTO(personService.getPersonByNameAndSurname(firstname, lastname)));
-//    }
+
+    @GetMapping("/persons")
+    public ResponseEntity<?> getPersonByNameAndSurname(@RequestParam("firstname") @NotBlank String firstname,
+                                                       @RequestParam("lastname") @NotBlank String lastname,
+                                                       @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFull) {
+
+        return (isFull) ? ok(personMapper.toRestDTO(personService.getFullPersonInfoByNameSurname(firstname, lastname)))
+                        : ok(personMapper.toRestDTO(personService.getPartialPersonInfoByNameSurname(firstname, lastname)));
+    }
 ////////////////////
 
 

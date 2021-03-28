@@ -60,15 +60,38 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
     })
     Optional<PersonDAO> findFullPersonInfoByEmail(String email);
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    ////
+
+    @Query(value = "{name: ?0, surname: ?1}",
+            fields = "{_id:1," +
+                    " name:1," +
+                    " surname:1," +
+                    " phone:1," +
+                    " email:1," +
+                    " address:1," +
+                    " createdDate:1," +
+                    " createdBy:1," +
+                    " modifiedDate:1," +
+                    " modifiedBy:1}")
+    Optional<PersonDAO> findPartialPersonInfoByNameAndSurname(String firstname, String lastname);
+
+    @Aggregation(pipeline = {
+            "{$lookup: {from: quests, localField: questStatus,  foreignField: _id,    as: questStatus}}",
+            "{$unwind: {path: $questStatus, preserveNullAndEmptyArrays: true}}",
+            "{$lookup: {from: skills, localField: skillSet,     foreignField: _id,    as: skillSet}}",
+            "{$unwind: {path: $skillSet, preserveNullAndEmptyArrays: true}}",
+            "{$lookup: {from: stats,  localField: stats,        foreignField: _id,    as: stats}}",
+            "{$unwind: {path: $stats, preserveNullAndEmptyArrays: true}}",
+            "{$match : {name: ?0, surname: ?1}}"
+    })
+    Optional<PersonDAO> findFullPersonInfoByNameAndSurname(String firstname, String lastname);
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    @Query("{ 'email' : ?0 }")
-    Optional<PersonDAO> findPersonByEmail(String email);
-
-
-    @Query(value = "{firstname: ?0, lastname: ?1}")
-    Optional<PersonDAO> findPersonByNameAndSurname(String firstname, String lastname);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    ////
+//    @Query("{ 'email' : ?0 }")
+//    Optional<PersonDAO> findPersonByEmail(String email);
+//
+//
+//    @Query(value = "{firstname: ?0, lastname: ?1}")
+//    Optional<PersonDAO> findPersonByNameAndSurname(String firstname, String lastname);
 }
