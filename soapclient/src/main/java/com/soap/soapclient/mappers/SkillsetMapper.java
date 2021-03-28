@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 @Component
-public interface SkillsetMapper {
-
-//    @Mapping(source = "id", target = "id")
-//    SkillSetDTO toRestDTO(SkillSet skillSet);
+public interface SkillsetMapper extends BasicMapper {
 
 }

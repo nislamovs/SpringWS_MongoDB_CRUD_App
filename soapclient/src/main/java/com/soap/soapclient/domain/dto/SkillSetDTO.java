@@ -2,6 +2,7 @@ package com.soap.soapclient.domain.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,15 +13,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SkillSetDTO extends AbstractDTO {
 
-    private int gambling;
-    private int pickpocketing;
-    private int lockpicking;
-    private int technology;
-    private int martialArts;
-    private int lightWeapons;
-    private int heavyWeapons;
-    private int barter;
-    private int speechcraft;
+    private Integer gambling;
+    private Integer pickpocketing;
+    private Integer lockpicking;
+    private Integer technology;
+    private Integer martialArts;
+    private Integer lightWeapons;
+    private Integer heavyWeapons;
+    private Integer barter;
+    private Integer speechcraft;
 }

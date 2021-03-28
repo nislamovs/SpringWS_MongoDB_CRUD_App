@@ -1,15 +1,12 @@
 package com.soap.soapclient.services;
 
-import com.soap.soapclient.wsdl.GetPersonsRequest;
-import com.soap.soapclient.wsdl.GetPersonsResponse;
+import com.soap.soapclient.wsdl.GetFullPersonResponse;
+import com.soap.soapclient.wsdl.GetPartialPersonByIdRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
-
-import static java.lang.String.format;
-import static java.time.Instant.now;
 
 
 @Slf4j
@@ -20,14 +17,14 @@ public class StatsClient extends WebServiceGatewaySupport {
     private final String PATH_PREFIX = "/api/v1/ws/persons";
     private final String TARGET_NAMESPACE_PREFIX = "http://localhost:8082" + PATH_PREFIX;
 
-    public GetPersonsResponse updateStatsValue(String email, String statName, String statValue) {
+    public GetFullPersonResponse updateStatsValue(String email, String statName, String statValue) {
 
-        GetPersonsRequest request = new GetPersonsRequest();
+        GetPartialPersonByIdRequest request = new GetPartialPersonByIdRequest();
         request.setPersonId(email);
 
-        GetPersonsResponse response = (GetPersonsResponse) getWebServiceTemplate()
+        GetFullPersonResponse response = (GetFullPersonResponse) getWebServiceTemplate()
                 .marshalSendAndReceive(TARGET_NAMESPACE_PREFIX, request,
-                        new SoapActionCallback(TARGET_NAMESPACE_PREFIX + "/GetPersonsRequest"));
+                        new SoapActionCallback(TARGET_NAMESPACE_PREFIX + "/GetPersonRequest"));
 
         return response;
     }

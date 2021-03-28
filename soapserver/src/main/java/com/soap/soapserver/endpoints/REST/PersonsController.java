@@ -7,6 +7,7 @@ import com.soap.soapserver.domain.dto.PersonDefaultResponseDTO;
 import com.soap.soapserver.services.PersonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,16 +30,21 @@ public class PersonsController {
     private final PersonMapper personMapper;
 
     @GetMapping("/persons/{personId}")
-    public ResponseEntity<?> getPersonsInfoById(@PathVariable("personId") @NotBlank String personId) {
-        return ok(personMapper.toDTO(personService.retrievePersonById(personId)));
+    public ResponseEntity<?> getPersonsInfoById(@PathVariable("personId") @NotBlank String personId,
+                                                @RequestParam(value = "fullInfo", defaultValue = "false") @NotBlank boolean isFullInfo) {
+
+        return isFullInfo ? ok(personMapper.toDTO(personService.retrieveFullPersonInfoById(personId)))
+                          : ok(personMapper.toDTO(personService.retrievePartialPersonInfoById(personId)));
+
+//        return ok(personMapper.toDTO(personService.retrievePersonById(personId)));
     }
 
-    @GetMapping("/persons/{personEmail}")
-    public ResponseEntity<?> getPersonsFullInfoByEmail(@PathVariable("personEmail") @NotBlank String personEmail,
-                                                       @RequestParam(value = "fullInfo", required = false) @NotBlank boolean isFullInfo) {
+    @GetMapping("/persons/email/{personEmail}")
+    public ResponseEntity<?> getPersonsInfoByEmail(@PathVariable("personEmail") @NotBlank String personEmail,
+                                                   @RequestParam(value = "fullInfo", defaultValue = "false") @NotBlank boolean isFullInfo) {
 
-        return isFullInfo ? ok(personMapper.toDTO(personService.retrieveFullPersonInfoById(personEmail)))
-                          : ok(personMapper.toDTO(personService.retrievePersonByEmail(personEmail)));
+        return isFullInfo ? ok(personMapper.toDTO(personService.retrieveFullPersonInfoByEmail(personEmail)))
+                          : ok(personMapper.toDTO(personService.retrievePartialPersonInfoByEmail(personEmail)));
     }
 
     @GetMapping("/persons/all")
@@ -52,7 +58,8 @@ public class PersonsController {
     public ResponseEntity<?> getPersonByNameAndSurname(@RequestParam("firstname") @NotBlank String firstname,
                                                        @RequestParam("lastname") @NotBlank String lastname ) {
 
-        return ok(personMapper.toDTO(personService.retrievePersonByNameSurname(firstname, lastname)));
+//        return ok(personMapper.toDTO(personService.retrievePersonByNameSurname(firstname, lastname)));
+        return ok("");
     }
 
     @PostMapping("/persons")

@@ -2,7 +2,8 @@ package com.soap.soapserver.converters.mappers;
 
 import com.soap.soapserver.domain.dto.PersonDTO;
 import com.soap.soapserver.models.PersonDAO;
-import https.localhost._8443.api.v1.ws.persons.Person;
+import https.localhost._8443.api.v1.ws.persons.PersonFull;
+import https.localhost._8443.api.v1.ws.persons.PersonPartial;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +26,10 @@ public interface PersonMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "createdDate", target = "createdDate", qualifiedByName = "InstantToString")
     @Mapping(source = "modifiedDate", target = "modifiedDate", qualifiedByName = "InstantToString")
-    Person toSoapDTO(PersonDAO person);
+    PersonFull toSoapDTO(PersonDAO person);
+
+    @Mapping(source = "id", target = "id")
+    PersonPartial simplify(PersonFull personFull);
 
 //    @Mapping(source = "id", target = "id")
 //    @Mapping(source = "date", target = "date", qualifiedByName = "DateToLocalDate")

@@ -17,24 +17,24 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Stats extends AbstractDocument {
 
         @Field(name="strength")
-        private int strength;
+        private Integer strength;
 
         @Field(name="endurance")
-        private int endurance;
+        private Integer endurance;
 
         @Field(name="dexterity")
-        private int dexterity;
+        private Integer dexterity;
 
         @Field(name="intellect")
-        private int intellect;
+        private Integer intellect;
 
         @Field(name="attention")
-        private int attention;
+        private Integer attention;
 
         @Field(name="personality")
-        private int personality;
+        private Integer personality;
 
         @Field(name="luck")
-        private int luck;
+        private Integer luck;
 
 }

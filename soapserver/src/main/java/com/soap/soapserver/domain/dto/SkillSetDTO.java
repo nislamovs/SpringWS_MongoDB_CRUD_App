@@ -14,13 +14,13 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SkillSetDTO extends AbstractDTO {
 
-    private int gambling;
-    private int pickpocketing;
-    private int lockpicking;
-    private int technology;
-    private int martialArts;
-    private int lightWeapons;
-    private int heavyWeapons;
-    private int barter;
-    private int speechcraft;
+    private Integer gambling;
+    private Integer pickpocketing;
+    private Integer lockpicking;
+    private Integer technology;
+    private Integer martialArts;
+    private Integer lightWeapons;
+    private Integer heavyWeapons;
+    private Integer barter;
+    private Integer speechcraft;
 }

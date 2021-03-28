@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StatsDTO extends AbstractDTO {
 
-    private int strength;
-    private int endurance;
-    private int dexterity;
-    private int intellect;
-    private int attention;
-    private int personality;
-    private int luck;
+    private Integer strength;
+    private Integer endurance;
+    private Integer dexterity;
+    private Integer intellect;
+    private Integer attention;
+    private Integer personality;
+    private Integer luck;
 }

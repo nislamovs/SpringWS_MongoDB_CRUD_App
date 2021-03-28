@@ -17,29 +17,29 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class SkillSet extends AbstractDocument {
 
         @Field(name="gambling")
-        private int gambling;
+        private Integer gambling;
 
         @Field(name="pickpocketing")
-        private int pickpocketing;
+        private Integer pickpocketing;
 
         @Field(name="lockpicking")
-        private int lockpicking;
+        private Integer lockpicking;
 
         @Field(name="technology")
-        private int technology;
+        private Integer technology;
 
         @Field(name="martialArts")
-        private int martialArts;
+        private Integer martialArts;
 
         @Field(name="lightWeapons")
-        private int lightWeapons;
+        private Integer lightWeapons;
 
         @Field(name="heavyWeapons")
-        private int heavyWeapons;
+        private Integer heavyWeapons;
 
         @Field(name="barter")
-        private int barter;
+        private Integer barter;
 
         @Field(name="speechcraft")
-        private int speechcraft;
+        private Integer speechcraft;
 }

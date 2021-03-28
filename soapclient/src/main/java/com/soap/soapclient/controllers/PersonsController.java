@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.websocket.server.PathParam;
 
 import static java.time.Instant.now;
 import static org.springframework.http.ResponseEntity.ok;
@@ -24,20 +25,22 @@ public class PersonsController {
     private final PersonMapper personMapper;
 
     @GetMapping("/persons/{personId}")
-    public ResponseEntity<?> getPersonsInfoById(@PathVariable("personId") @NotBlank String personId) {
+    public ResponseEntity<?> getPersonsInfoById(@PathVariable("personId") @NotBlank String personId,
+                                                @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFull) {
 
+        return (isFull) ? ok(personMapper.toRestDTO(personService.getFullPersonInfoById(personId)))
+                        : ok(personMapper.toRestDTO(personService.getPartialPersonInfoById(personId)));
 
-        return ok(personMapper.toRestDTO(personService.getPersonById(personId).getPerson()));
     }
 
-//    @GetMapping("/persons/{personEmail}")
-//    public ResponseEntity<?> getPersonsFullInfoByEmail(@PathVariable("personEmail") @NotBlank String personEmail,
-//                                                       @RequestParam(value = "fullInfo", required = false) @NotBlank boolean isFullInfo) {
-//
-//        return isFullInfo ? ok(personMapper.toRestDTO(personService.getFullPersonInfoById(personEmail)))
-//                : ok(personMapper.toRestDTO(personService.getPersonByEmail(personEmail)));
-//    }
-//
+    @GetMapping("/persons/email/{personEmail}")
+    public ResponseEntity<?> getPersonsFullInfoByEmail(@PathVariable("personEmail") @NotBlank String personEmail,
+                                                       @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFull) {
+
+        return (isFull) ? ok(personMapper.toRestDTO(personService.getFullPersonInfoByEmail(personEmail)))
+                        : ok(personMapper.toRestDTO(personService.getPartialPersonInfoByEmail(personEmail)));
+    }
+////////////////////
 //    @GetMapping("/persons")
 //    public ResponseEntity<?> getPersonsList(@RequestParam("page") @NotBlank int page,
 //                                            @RequestParam("size") @NotBlank int size) {
@@ -51,7 +54,9 @@ public class PersonsController {
 //
 //        return ok(personMapper.toRestDTO(personService.getPersonByNameAndSurname(firstname, lastname)));
 //    }
-//
+////////////////////
+
+
 //    @PostMapping("/persons")
 //    public ResponseEntity<?> createPerson(@RequestBody PersonDTO person) {
 //

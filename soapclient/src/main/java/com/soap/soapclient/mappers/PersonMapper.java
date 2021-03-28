@@ -1,31 +1,25 @@
 package com.soap.soapclient.mappers;
 
 import com.soap.soapclient.domain.dto.PersonDTO;
-import com.soap.soapclient.wsdl.Person;
-import org.mapstruct.*;
+import com.soap.soapclient.wsdl.PersonFull;
+import com.soap.soapclient.wsdl.PersonPartial;
+import org.mapstruct.InjectionStrategy;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 import org.springframework.stereotype.Component;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 @Component
-public interface PersonMapper {
+public interface PersonMapper extends BasicMapper {
 
-    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
-
-    @Mapping(source = "id", target = "id")
+    @Mapping(source = "id", target = "id", qualifiedByName = "IdFormatConverter")
+    @Mapping(source = "questStatus", target = "questStatus", qualifiedByName = "QuestStatusMapper")
+    @Mapping(source = "skillSet", target = "skillSet", qualifiedByName = "SkillSetMapper")
+    @Mapping(source = "stats", target = "stats", qualifiedByName = "StatsMapper")
     @Mapping(source = "createdDate", target = "createdDate", qualifiedByName = "StringToInstant")
     @Mapping(source = "modifiedDate", target = "modifiedDate", qualifiedByName = "StringToInstant")
-    PersonDTO toRestDTO(Person person);
+    PersonDTO toRestDTO(PersonFull person);
 
-    @Named("StringToInstant")
-    default Instant convertStringToInstant(String dateTime) {
-        LocalDateTime ldt = LocalDateTime.parse( dateTime , dateFormat );
-
-        return ldt.atZone(ZoneId.systemDefault()).toInstant();
-    }
 }

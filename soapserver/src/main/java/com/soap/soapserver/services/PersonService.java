@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+
 import static java.lang.String.format;
 import static org.springframework.data.domain.PageRequest.of;
 
@@ -23,33 +25,42 @@ public class PersonService {
     private final PersonMapper personMapper;
 
     @Transactional(readOnly = true)
-    public PersonDAO retrievePersonById(String personId) {
-        return personRepository.findById(personId)
+    public PersonDAO retrievePartialPersonInfoById(String personId) {
+        return personRepository.findPartialPersonInfoById(personId)
             .orElseThrow(() -> new PersonNotFoundException(format("Person by id '%s' was not found", personId)));
     }
 
     @Transactional(readOnly = true)
     public PersonDAO retrieveFullPersonInfoById(String personId) {
-        return personRepository.findFullInfoById(personId)
+        return personRepository.findFullPersonInfoById(personId)
                 .orElseThrow(() -> new PersonNotFoundException(format("Person by id '%s' was not found", personId)));
     }
 
     @Transactional(readOnly = true)
-    public Page<PersonDAO> retrievePersonList(int page, int size) {
+    public PersonDAO retrievePartialPersonInfoByEmail(String email) {
+        return personRepository.findPartialPersonInfoByEmail(email)
+                .orElseThrow(() -> new PersonNotFoundException(format("Person by email '%s' was not found", email)));
+    }
+
+
+    @Transactional(readOnly = true)
+    public PersonDAO retrieveFullPersonInfoByEmail(String email) {
+        return personRepository.findFullPersonInfoByEmail(email)
+                .orElseThrow(() -> new PersonNotFoundException(format("Person by email '%s' was not found", email)));
+    }
+    ////
+
+    @Transactional(readOnly = true)
+    public Page<PersonDAO> retrievePartialPersonInfoList(int page, int size) {
         return personRepository.findAll(of(page, size));
     }
 
     @Transactional(readOnly = true)
-    public PersonDAO retrievePersonByNameSurname(String firstname, String lastname) {
+    public PersonDAO retrieveFullPersonInfoList(String firstname, String lastname) {
         return personRepository.findPersonByNameAndSurname(firstname, lastname)
                 .orElseThrow(() -> new PersonNotFoundException(format("Person by name, surname '%s, %s' was not found", firstname, lastname)));
     }
 
-    @Transactional(readOnly = true)
-    public PersonDAO retrievePersonByEmail(String email) {
-        return personRepository.findPersonByEmail(email)
-                .orElseThrow(() -> new PersonNotFoundException(format("Person by email '%s' was not found", email)));
-    }
 
 
 

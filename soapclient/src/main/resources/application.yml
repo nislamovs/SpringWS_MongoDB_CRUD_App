@@ -10,9 +10,18 @@ application:
   title: SOAP client mcs
 
 
-logging:
-  level:
-    com.soap.soapclient: INFO
-    org:
-      springframework:
-        ws: DEBUG
+logging.level.org.springframework.ws.client.MessageTracing.sent: TRACE
+logging.level.org.springframework.ws.client.MessageTracing.received: TRACE
+logging.level.org.springframework.ws: TRACE
+logging.level.com.soap.soapclient: TRACE
+
+client:
+  ssl:
+    keyStore: classpath:clientWs.p12
+    keyStorePassword: password
+    keyPassword: password
+    trustStore: classpath:truststore.jks
+    trustStorePassword: password
+
+client.soap.ws.pathPrefix: /api/v1/ws
+client.soap.ws.targetNamespace: https://localhost:8443${client.soap.ws.pathPrefix}

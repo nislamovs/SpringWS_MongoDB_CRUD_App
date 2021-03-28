@@ -17,19 +17,19 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class QuestStatus extends AbstractDocument {
 
         @Field(name="findJohn")
-        private boolean findJohn = false;
+        private Boolean findJohn;
 
         @Field(name="killMary")
-        private boolean killMary = false;
+        private Boolean killMary;
 
         @Field(name="steelCar")
-        private boolean steelCar = false;
+        private Boolean steelCar;
 
         @Field(name="casinoRobbery")
-        private boolean casinoRobbery = false;
+        private Boolean casinoRobbery;
 
         @Field(name="steelPainting")
-        private boolean steelPainting = false;
+        private Boolean steelPainting;
 }
 
 

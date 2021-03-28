@@ -19,6 +19,7 @@
         mongodb                                                                                                      OK
         mongotrek                                                                                                    OK
 
+-------------------------------------------------------------------------------------------------------------------------
 
 Database:                                                                                                            OK
 
@@ -72,6 +73,8 @@ Database:                                                                       
             steelPainting
 
 
+-------------------------------------------------------------------------------------------------------------------------
+
 - Configuration
 
 
@@ -81,6 +84,7 @@ Database:                                                                       
 - exceptions                                                                                                        OK
 - Mapstruct mappers                                                                                                 OK
 - Mongo converters                                                                                                  OK
+- create them static                                                                                                --
 
 - SOAP endpoints                                                                                                    --
 - Endpoints validation                                                                                              --
@@ -93,6 +97,16 @@ Database:                                                                       
 
 - Add security (basic auth)                                                                                         --
 
+-Add scripts for keys generation for server and client                                                              --
+move webserviceTemplate as a bean to configuration and create method for usage in client Service
+
+Test this :
+
+- @Action soap annotation
+- @SoapHeader
+
+-- rename short to partial
+-- create validation for rest dto's
 
 --Sources:
 
@@ -103,3 +117,4 @@ https://stackoverflow.com/questions/12385920/spring-mongodb-storing-retrieving-e
 
 http://www.netkiller.cn/java/spring/data/spring-data-mongodb.html
 https://stackoverflow.com/questions/50077611/cannot-resolve-reference-to-bean-mongotemplate-while-setting-bean-property-mo
+https://www.baeldung.com/x-509-authentication-in-spring-security

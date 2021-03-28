@@ -1,27 +1,81 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:tns="https://localhost:8443/api/v1/ws/persons"
            targetNamespace="https://localhost:8443/api/v1/ws/persons"
-           elementFormDefault="qualified"
->
+           elementFormDefault="qualified">
 
-    <xs:element name="getPersonsRequest">
+<!--    Requests-->
+
+    <xs:element name="getPartialPersonByIdRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="personId" type="xs:string"/>
-<!--                <xs:element name="personEmail" type="xs:string"/>-->
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="getPersonsResponse">
+    <xs:element name="getFullPersonByIdRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="person" type="tns:person"/>
+                <xs:element name="personId" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="person">
+    <xs:element name="getPartialPersonByEmailRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personEmail" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getFullPersonByEmailRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personEmail" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--    Responses-->
+
+    <xs:element name="getFullPersonResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="person" type="tns:personFull"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPartialPersonResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="person" type="tns:personPartial"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+<!--    DTO-->
+
+    <xs:complexType name="personPartial">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="surname" type="xs:string"/>
+            <xs:element name="phone" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+
+            <xs:element name="address" type="tns:address"/>
+
+            <xs:element name="createdDate" type="xs:string"/>
+            <xs:element name="createdBy" type="xs:string"/>
+            <xs:element name="modifiedDate" type="xs:string"/>
+            <xs:element name="modifiedBy" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="personFull">
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
 

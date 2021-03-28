@@ -1,15 +1,13 @@
 package com.soap.soapclient.mappers;
 
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import com.soap.soapclient.domain.dto.QuestStatusDTO;
+import com.soap.soapclient.wsdl.QuestStatus;
+import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 @Component
-public interface QuestStatusMapper {
+public interface QuestStatusMapper extends BasicMapper {
 
-//    @Mapping(source = "id", target = "id")
-//    QuestStatusDTO toRestDTO(QuestStatus questStatus);
 }

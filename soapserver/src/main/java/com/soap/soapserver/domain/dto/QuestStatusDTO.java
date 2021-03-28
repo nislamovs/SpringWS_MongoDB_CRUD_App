@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class QuestStatusDTO extends AbstractDTO {
 
-    private boolean findJohn = false;
-    private boolean killMary = false;
-    private boolean steelCar = false;
-    private boolean casinoRobbery = false;
-    private boolean steelPainting = false;
+    private Boolean findJohn;
+    private Boolean killMary;
+    private Boolean steelCar;
+    private Boolean casinoRobbery;
+    private Boolean steelPainting;
 }
