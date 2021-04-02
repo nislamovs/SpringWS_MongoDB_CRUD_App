@@ -1,7 +1,7 @@
 package com.soap.soapserver.converters.mappers;
 
 import com.soap.soapserver.domain.dto.QuestStatusDTO;
-import com.soap.soapserver.models.QuestStatus;
+import com.soap.soapserver.models.QuestStatusDAO;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 public interface QuestStatusMapper {
 
     @Mapping(source = "id", target = "id")
-    QuestStatusDTO toDTO(QuestStatus questStatus);
+    QuestStatusDTO toDTO(QuestStatusDAO questStatus);
 
     @Mapping(source = "id", target = "id")
-    QuestStatus toDAO(QuestStatusDTO questStatusDTO);
+    QuestStatusDAO toDAO(QuestStatusDTO questStatusDTO);
 }

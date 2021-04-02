@@ -9,6 +9,7 @@ import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 
 @Slf4j
@@ -100,5 +101,33 @@ public class PersonsClient extends WebServiceGatewaySupport {
                 new SoapActionCallback(TARGET_NAMESPACE_PREFIX + "GetFullPersonByNameSurnameRequest"));
 
         return response.getPerson();
+    }
+
+    public List<PersonPartial> getPartialPersonInfoList(int page, int size) {
+
+        GetPartialPersonInfoListRequest request = new GetPartialPersonInfoListRequest();
+        request.setPage(page);
+        request.setSize(size);
+
+        GetPartialPersonInfoListResponse response = (GetPartialPersonInfoListResponse) webServiceTemplate.marshalSendAndReceive(
+                TARGET_NAMESPACE_PREFIX,
+                request,
+                new SoapActionCallback(TARGET_NAMESPACE_PREFIX + "GetPartialPersonInfoListRequest"));
+
+        return response.getPersonList();
+    }
+
+    public List<PersonFull> getFullPersonInfoList(int page, int size) {
+
+        GetFullPersonInfoListRequest request = new GetFullPersonInfoListRequest();
+        request.setPage(page);
+        request.setSize(size);
+
+        GetFullPersonInfoListResponse response = (GetFullPersonInfoListResponse) webServiceTemplate.marshalSendAndReceive(
+                TARGET_NAMESPACE_PREFIX,
+                request,
+                new SoapActionCallback(TARGET_NAMESPACE_PREFIX + "GetFullPersonInfoListRequest"));
+
+        return response.getPersonList();
     }
 }

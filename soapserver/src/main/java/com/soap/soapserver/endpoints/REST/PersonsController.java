@@ -7,7 +7,6 @@ import com.soap.soapserver.domain.dto.PersonDefaultResponseDTO;
 import com.soap.soapserver.services.PersonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +14,8 @@ import javax.validation.constraints.NotBlank;
 
 import java.util.stream.Collectors;
 
-import static java.lang.String.format;
 import static java.time.Instant.now;
-import static org.springframework.data.domain.PageRequest.of;
+import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.ok;
 
 @Slf4j
@@ -36,7 +34,6 @@ public class PersonsController {
         return isFullInfo ? ok(personMapper.toDTO(personService.retrieveFullPersonInfoById(personId)))
                           : ok(personMapper.toDTO(personService.retrievePartialPersonInfoById(personId)));
 
-//        return ok(personMapper.toDTO(personService.retrievePersonById(personId)));
     }
 
     @GetMapping("/persons/email/{personEmail}")
@@ -47,13 +44,6 @@ public class PersonsController {
                           : ok(personMapper.toDTO(personService.retrievePartialPersonInfoByEmail(personEmail)));
     }
 
-//    @GetMapping("/persons/all")
-//    public ResponseEntity<?> getPersonsList(@RequestParam("page") @NotBlank int page,
-//                                            @RequestParam("size") @NotBlank int size ) {
-//
-//        return ok(personService.retrievePersonList(page, size).stream().map(personMapper::toDTO).collect(Collectors.toList()));
-//    }
-
     @GetMapping("/persons")
     public ResponseEntity<?> getPersonByNameAndSurname(@RequestParam("firstname") @NotBlank String firstname,
                                                        @RequestParam("lastname") @NotBlank String lastname,
@@ -61,6 +51,15 @@ public class PersonsController {
 
         return isFullInfo ? ok(personMapper.toDTO(personService.retrieveFullPersonInfoByNameSurname(firstname, lastname)))
                           : ok(personMapper.toDTO(personService.retrievePartialPersonInfoByNameSurname(firstname, lastname)));
+    }
+
+    @GetMapping("/persons/all")
+    public ResponseEntity<?> getPersonsList(@RequestParam("page") @NotBlank int page,
+                                            @RequestParam("size") @NotBlank int size,
+                                            @RequestParam(value = "fullInfo", defaultValue = "false") @NotBlank boolean isFullInfo) {
+
+        return isFullInfo ? ok(personService.retrieveFullPersonInfoList(page, size).stream().map(personMapper::toDTO).collect(toList()))
+                          : ok(personService.retrievePartialPersonInfoList(page, size).stream().map(personMapper::toDTO).collect(toList()));
     }
 
     @PostMapping("/persons")

@@ -1,6 +1,6 @@
 package com.soap.soapserver.repository;
 
-import com.soap.soapserver.models.SkillSet;
+import com.soap.soapserver.models.SkillSetDAO;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface SkillsRepository extends MongoRepository<SkillSet, String> {
+public interface SkillsRepository extends MongoRepository<SkillSetDAO, String> {
 
     @Query(value = "{totalCount: 0}")
-    Optional<SkillSet> updateSkillValue(String personEmail, String skillName, int skillValue);
+    Optional<SkillSetDAO> updateSkillValue(String personEmail, String skillName, int skillValue);
 
 }

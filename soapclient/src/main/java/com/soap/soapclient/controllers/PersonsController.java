@@ -13,6 +13,7 @@ import javax.websocket.server.PathParam;
 import java.util.stream.Collectors;
 
 import static java.time.Instant.now;
+import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RequiredArgsConstructor
@@ -28,41 +29,41 @@ public class PersonsController {
 
     @GetMapping("/persons/{personId}")
     public ResponseEntity<?> getPersonsInfoById(@PathVariable("personId") @NotBlank String personId,
-                                                @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFull) {
+                                                @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFullInfo) {
 
-        return (isFull) ? ok(personMapper.toRestDTO(personService.getFullPersonInfoById(personId)))
-                        : ok(personMapper.toRestDTO(personService.getPartialPersonInfoById(personId)));
+        return (isFullInfo) ? ok(personMapper.toRestDTO(personService.getFullPersonInfoById(personId)))
+                            : ok(personMapper.toRestDTO(personService.getPartialPersonInfoById(personId)));
 
     }
 
     @GetMapping("/persons/email/{personEmail}")
     public ResponseEntity<?> getPersonsFullInfoByEmail(@PathVariable("personEmail") @NotBlank String personEmail,
-                                                       @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFull) {
+                                                       @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFullInfo) {
 
-        return (isFull) ? ok(personMapper.toRestDTO(personService.getFullPersonInfoByEmail(personEmail)))
-                        : ok(personMapper.toRestDTO(personService.getPartialPersonInfoByEmail(personEmail)));
+        return (isFullInfo) ? ok(personMapper.toRestDTO(personService.getFullPersonInfoByEmail(personEmail)))
+                            : ok(personMapper.toRestDTO(personService.getPartialPersonInfoByEmail(personEmail)));
     }
-////////////////////
-//    @GetMapping("/persons")
-//    public ResponseEntity<?> getPersonsList(@RequestParam("page") @NotBlank int page,
-//                                            @RequestParam("size") @NotBlank int size,
-//                                            @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFull) {
-//
-//        return (isFull) ? ok(personService.getFullPersonInfoList(page, size).stream().map(personMapper::toDTO).collect(Collectors.toList()))
-//                        : ok(personService.getPartialPersonInfoList(page, size).stream().map(personMapper::toDTO).collect(Collectors.toList()));
-//
-//        return
-//    }
 
     @GetMapping("/persons")
     public ResponseEntity<?> getPersonByNameAndSurname(@RequestParam("firstname") @NotBlank String firstname,
                                                        @RequestParam("lastname") @NotBlank String lastname,
-                                                       @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFull) {
+                                                       @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFullInfo) {
 
-        return (isFull) ? ok(personMapper.toRestDTO(personService.getFullPersonInfoByNameSurname(firstname, lastname)))
-                        : ok(personMapper.toRestDTO(personService.getPartialPersonInfoByNameSurname(firstname, lastname)));
+        return (isFullInfo) ? ok(personMapper.toRestDTO(personService.getFullPersonInfoByNameSurname(firstname, lastname)))
+                : ok(personMapper.toRestDTO(personService.getPartialPersonInfoByNameSurname(firstname, lastname)));
     }
-////////////////////
+
+    @GetMapping("/persons/all")
+    public ResponseEntity<?> getPersonsList(@RequestParam("page") @NotBlank int page,
+                                            @RequestParam("size") @NotBlank int size,
+                                            @RequestParam(value = "fullInfo", defaultValue = "false") boolean isFullInfo) {
+
+        return isFullInfo ? ok(personService.getFullPersonInfoList(page, size).stream().map(personMapper::toRestDTO).collect(toList()))
+                          : ok(personService.getPartialPersonInfoList(page, size).stream().map(personMapper::toRestDTO).collect(toList()));
+
+    }
+
+    ////////////////////
 
 
 //    @PostMapping("/persons")

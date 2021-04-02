@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @NoArgsConstructor
 @Document(collection = "stats")
 @TypeAlias("stats")
-public class Stats extends AbstractDocument {
+public class StatsDAO extends AbstractDocument {
 
         @Field(name="strength")
         private Integer strength;

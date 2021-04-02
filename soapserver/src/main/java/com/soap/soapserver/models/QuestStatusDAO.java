@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @NoArgsConstructor
 @Document(collection = "quests")
 @TypeAlias("quests")
-public class QuestStatus extends AbstractDocument {
+public class QuestStatusDAO extends AbstractDocument {
 
         @Field(name="findJohn")
         private Boolean findJohn;

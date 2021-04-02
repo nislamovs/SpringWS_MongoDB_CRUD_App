@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -38,17 +37,17 @@ public class PersonDAO extends AbstractDocument {
     @Field(name = "address")
     private Address address;
 
-    @DBRef(db = "characters", lazy = true)
+    @DBRef(db = "characters", lazy = false)
     @Builder.Default
-    private QuestStatus questStatus = new QuestStatus();
+    private QuestStatusDAO questStatus = new QuestStatusDAO();
 
-    @DBRef(db = "characters", lazy = true)
-    @Builder.Default
-    private SkillSet skillSet = new SkillSet();
+    @DBRef(db = "characters", lazy = false)
+//    @Builder.Default
+    private SkillSetDAO skillSet = new SkillSetDAO();
 
-    @DBRef(db = "characters", lazy = true)
-    @Builder.Default
-    private Stats stats = new Stats();
+    @DBRef(db = "characters", lazy = false)
+//    @Builder.Default
+    private StatsDAO stats = new StatsDAO();
 
     @Field(name = "perksSet")
     private Set<Perks> perksSet;

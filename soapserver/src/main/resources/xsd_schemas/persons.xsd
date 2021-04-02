@@ -55,6 +55,24 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="getPartialPersonInfoListRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="page" type="xs:int"/>
+                <xs:element name="size" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getFullPersonInfoListRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="page" type="xs:int"/>
+                <xs:element name="size" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <!--    Responses-->
 
     <xs:element name="getFullPersonResponse">
@@ -72,6 +90,30 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <xs:element name="getFullPersonInfoListResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personList" maxOccurs="unbounded" minOccurs="0" type="tns:personFull"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPartialPersonInfoListResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personList" maxOccurs="unbounded" minOccurs="0" type="tns:personPartial"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+<!--    <xs:simpleType name="personsFullInfoList">-->
+<!--        <xs:list itemType='tns:personFull'/>-->
+<!--    </xs:simpleType>-->
+
+<!--    <xs:simpleType name="personsPartialInfoList">-->
+<!--        <xs:list itemType='tns:personPartial'/>-->
+<!--    </xs:simpleType>-->
 
 <!--    DTO-->
 

@@ -1,6 +1,7 @@
 package com.soap.soapserver.endpoints.SOAP;
 
 import com.soap.soapserver.converters.mappers.PersonMapper;
+import com.soap.soapserver.models.PersonDAO;
 import com.soap.soapserver.services.PersonService;
 import https.localhost._8443.api.v1.ws.persons.*;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,12 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collector;
+
+import static java.util.stream.Collectors.toList;
 
 @Endpoint
 @RequiredArgsConstructor
@@ -111,21 +118,29 @@ public class PersonsEndpoint {
         return response;
     }
 
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPartialPersonInfoListRequest")
+    public GetPartialPersonInfoListResponse getPartialPersonInfoList(@RequestPayload GetPartialPersonInfoListRequest request) {
 
+        List<PersonPartial> personPartialInfoList = personService.retrievePartialPersonInfoList(request.getPage(), request.getSize())
+                .stream().map(personMapper::toSoapDTO).map(personMapper::simplify).collect(toList());
 
-//
-//
-//	@ResponsePayload
-//	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetFullPersonByEmailRequest")
-//	public GetFullPersonResponse getFullPersonsInfoByEmail(@RequestPayload GetPersonByEmailRequest request) {
-//		GetFullPersonResponse response = new GetFullPersonResponse();
-//		response.setPerson(
-//			personMapper.toSoapDTO(
-//				personService.retrievePersonByEmail(request.getPersonEmail())
-//			)
-//		);
-//
-//		System.out.println(response.getPerson().toString());
-//		return response;
-//	}
+        GetPartialPersonInfoListResponse response = new GetPartialPersonInfoListResponse();
+        response.getPersonList().addAll(personPartialInfoList);
+
+        return response;
+    }
+
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getFullPersonInfoListRequest")
+    public GetFullPersonInfoListResponse getFullPersonInfoList(@RequestPayload GetFullPersonInfoListRequest request) {
+
+        List<PersonFull> personFullInfoList = personService.retrieveFullPersonInfoList(request.getPage(), request.getSize())
+                .stream().map(personMapper::toSoapDTO).collect(toList());
+
+        GetFullPersonInfoListResponse response = new GetFullPersonInfoListResponse();
+        response.getPersonList().addAll(personFullInfoList);
+
+        return response;
+    }
 }

@@ -1,7 +1,7 @@
 package com.soap.soapserver.converters.mappers;
 
 import com.soap.soapserver.domain.dto.SkillSetDTO;
-import com.soap.soapserver.models.SkillSet;
+import com.soap.soapserver.models.SkillSetDAO;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 public interface SkillsetMapper {
 
     @Mapping(source = "id", target = "id")
-    SkillSetDTO toDTO(SkillSet skillSet);
+    SkillSetDTO toDTO(SkillSetDAO skillSet);
 
     @Mapping(source = "id", target = "id")
-    SkillSet toDAO(SkillSetDTO skillSetDTO);
+    SkillSetDAO toDAO(SkillSetDTO skillSetDTO);
 }

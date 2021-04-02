@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static java.lang.String.format;
 import static org.springframework.data.domain.PageRequest.of;
@@ -42,22 +43,22 @@ public class PersonService {
                 .orElseThrow(() -> new PersonNotFoundException(format("Person by email '%s' was not found", email)));
     }
 
-
     @Transactional(readOnly = true)
     public PersonDAO retrieveFullPersonInfoByEmail(String email) {
         return personRepository.findFullPersonInfoByEmail(email)
                 .orElseThrow(() -> new PersonNotFoundException(format("Person by email '%s' was not found", email)));
     }
-    ////
 
     @Transactional(readOnly = true)
-    public Page<PersonDAO> retrievePartialPersonInfoList(int page, int size) {
-        return personRepository.findAll(of(page, size));
+    public List<PersonDAO> retrievePartialPersonInfoList(int page, int size) {
+        System.out.println("Partial >>>   "+size + "  "+ page);
+        return personRepository.findAllPartialPersonInfo(page*size, size);
     }
 
     @Transactional(readOnly = true)
-    public Page<PersonDAO> retrieveFullPersonInfoList(int page, int size) {
-        return personRepository.findAll(of(page, size));
+    public List<PersonDAO> retrieveFullPersonInfoList(int page, int size) {
+        System.out.println("Full >>>   "+size + "  "+ page);
+        return personRepository.findAllFullPersonInfo(page*size, size);
     }
 
     @Transactional(readOnly = true)

@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -60,8 +61,6 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
     })
     Optional<PersonDAO> findFullPersonInfoByEmail(String email);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    ////
-
     @Query(value = "{name: ?0, surname: ?1}",
             fields = "{_id:1," +
                     " name:1," +
@@ -86,6 +85,24 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
     })
     Optional<PersonDAO> findFullPersonInfoByNameAndSurname(String firstname, String lastname);
 
+    @Aggregation(pipeline = {
+            "{$skip: ?0}",
+            "{$limit: ?1}",
+            "{$project: {_id:1, name:1, surname:1, phone:1, email:1, address:1, createdDate:1, createdBy:1, modifiedDate:1, modifiedBy:1}}"
+    })
+    List<PersonDAO> findAllPartialPersonInfo(int skip, int limit);
+
+    @Aggregation(pipeline = {
+            "{$lookup: {from: quests, localField: questStatus,  foreignField: _id,    as: questStatus}}",
+            "{$unwind: {path: $questStatus, preserveNullAndEmptyArrays: true}}",
+            "{$lookup: {from: skills, localField: skillSet,     foreignField: _id,    as: skillSet}}",
+            "{$unwind: {path: $skillSet, preserveNullAndEmptyArrays: true}}",
+            "{$lookup: {from: stats,  localField: stats,        foreignField: _id,    as: stats}}",
+            "{$unwind: {path: $stats, preserveNullAndEmptyArrays: true}}",
+            "{$skip: ?0}",
+            "{$limit: ?1}"
+    })
+    List<PersonDAO> findAllFullPersonInfo(int skip, int limit);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    ////
 //    @Query("{ 'email' : ?0 }")
