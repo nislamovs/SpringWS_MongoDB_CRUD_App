@@ -1,14 +1,8 @@
 package com.soap.soapclient.mappers;
 
 
-import com.soap.soapclient.domain.dto.PersonDTO;
-import com.soap.soapclient.domain.dto.QuestStatusDTO;
-import com.soap.soapclient.domain.dto.SkillSetDTO;
-import com.soap.soapclient.domain.dto.StatsDTO;
-import com.soap.soapclient.wsdl.PersonPartial;
-import com.soap.soapclient.wsdl.QuestStatus;
-import com.soap.soapclient.wsdl.SkillSet;
-import com.soap.soapclient.wsdl.Stats;
+import com.soap.soapclient.domain.dto.*;
+import com.soap.soapclient.wsdl.*;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
@@ -55,4 +49,37 @@ public interface BasicMapper {
     @Mapping(source = "createdDate", target = "createdDate", qualifiedByName = "StringToInstant")
     @Mapping(source = "modifiedDate", target = "modifiedDate", qualifiedByName = "StringToInstant")
     PersonDTO toRestDTO(PersonPartial person);
+
+    @Mapping(source = "id", target = "id", qualifiedByName = "IdFormatConverter")
+    @Mapping(source = "timestamp", target = "modifiedDate", qualifiedByName = "StringToInstant")
+    AbstractDTO toRestDTO(StatusResponse statusResponse);
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    @Named("QuestStatusSoapMapper")
+    @Mapping(source = "id", target = "id",  ignore = false)
+    @Mapping(source = "createdDate", target = "createdDate",  ignore = false)
+    @Mapping(source = "modifiedDate", target = "modifiedDate",  ignore = false)
+    @Mapping(source = "createdBy", target = "createdBy",  ignore = false)
+    @Mapping(source = "modifiedBy", target = "modifiedBy",  ignore = false)
+    QuestStatus map(QuestStatusDTO questStatus);
+
+    @Named("SkillSetSoapMapper")
+    @Mapping(source = "id", target = "id",  ignore = false)
+    @Mapping(source = "createdDate", target = "createdDate",  ignore = false)
+    @Mapping(source = "modifiedDate", target = "modifiedDate",  ignore = false)
+    @Mapping(source = "createdBy", target = "createdBy",  ignore = false)
+    @Mapping(source = "modifiedBy", target = "modifiedBy",  ignore = false)
+    SkillSet map(SkillSetDTO questStatus);
+
+    @Named("StatsSoapMapper")
+    @Mapping(source = "id", target = "id",  ignore = false)
+    @Mapping(source = "createdDate", target = "createdDate",  ignore = false)
+    @Mapping(source = "modifiedDate", target = "modifiedDate",  ignore = false)
+    @Mapping(source = "createdBy", target = "createdBy",  ignore = false)
+    @Mapping(source = "modifiedBy", target = "modifiedBy",  ignore = false)
+    Stats map(StatsDTO questStatus);
 }

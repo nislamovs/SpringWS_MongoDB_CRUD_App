@@ -34,12 +34,12 @@ application:
 #      auto-index-creation: false
 #      uri: mongodb://${spring.data.mongodb.host}:${spring.data.mongodb.port}/
 
-logging:
-  level:
-    com.soap.soapserver: INFO
-    org:
-      springframework:
-        ws: DEBUG
+logging.level.com.soap.soapserver: INFO
+logging.level.org.springframework.ws: DEBUG
+logging.level.data.mongodb.core.MongoTemplate: DEBUG
+
+
+
 
 client.soap.ws.pathPrefix: /api/v1/ws
 client.soap.ws.targetNamespace: https://localhost:8443${client.soap.ws.pathPrefix}

@@ -1,8 +1,10 @@
 package com.soap.soapserver.repository;
 
 
+import com.soap.soapserver.domain.dto.PersonDTO;
 import com.soap.soapserver.models.PersonDAO;
 import org.springframework.data.mongodb.repository.Aggregation;
+import org.springframework.data.mongodb.repository.DeleteQuery;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -103,6 +105,16 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
             "{$limit: ?1}"
     })
     List<PersonDAO> findAllFullPersonInfo(int skip, int limit);
+
+    @Query(value="{'_id' : 'ObjectId(\"?0\")'}")
+    void createNewPerson(PersonDAO newPerson);
+
+    @Query(value="{'_id' : 'ObjectId(\"?0\")'}")
+    void updateExistingPerson(PersonDAO person);
+
+    @DeleteQuery(value="{'_id' : 'ObjectId(\"?0\")'}")
+    void deletePersonById(String id);
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    ////
 //    @Query("{ 'email' : ?0 }")

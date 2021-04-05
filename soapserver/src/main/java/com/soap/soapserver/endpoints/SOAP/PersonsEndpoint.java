@@ -11,10 +11,13 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
 
+import static java.time.LocalDateTime.now;
 import static java.util.stream.Collectors.toList;
 
 @Endpoint
@@ -23,6 +26,7 @@ import static java.util.stream.Collectors.toList;
 public class PersonsEndpoint {
 
     //	private static final String NAMESPACE_URI = "https://localhost:8082/api/v1/ws/persons";
+    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
     private static final String NAMESPACE_URI = "https://localhost:8443/api/v1/ws/persons";
 
     private final PersonService personService;
@@ -140,6 +144,46 @@ public class PersonsEndpoint {
 
         GetFullPersonInfoListResponse response = new GetFullPersonInfoListResponse();
         response.getPersonList().addAll(personFullInfoList);
+
+        return response;
+    }
+
+
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createNewPersonRequest")
+    public StatusResponse createNewPerson(@RequestPayload CreateNewPersonRequest request) {
+
+        personService.createNewPerson(personMapper.toDTO(request.getPerson()));
+
+        StatusResponse response = new StatusResponse();
+        response.setId(request.getPerson().getId());
+        response.setTimestamp(now().format(dateFormat));
+
+        return response;
+    }
+
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "updateExistingPersonRequest")
+    public StatusResponse updatePerson(@RequestPayload UpdateExistingPersonRequest request) {
+
+        personService.editPersonData(personMapper.toDTO(request.getPerson()), request.getPerson().getId());
+
+        StatusResponse response = new StatusResponse();
+        response.setId(request.getPerson().getId());
+        response.setTimestamp(now().format(dateFormat));
+
+        return response;
+    }
+
+    @ResponsePayload
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "deletePersonRequest")
+    public StatusResponse deletePerson(@RequestPayload DeletePersonRequest request) {
+
+        personService.deletePersonById(request.getPersonId());
+
+        StatusResponse response = new StatusResponse();
+        response.setId(request.getPersonId());
+        response.setTimestamp(now().format(dateFormat));
 
         return response;
     }

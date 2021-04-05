@@ -73,7 +73,40 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="createNewPersonRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="person" type="tns:personFull"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateExistingPersonRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="person" type="tns:personFull"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deletePersonRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <!--    Responses-->
+
+    <xs:element name="statusResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+                <xs:element name="timestamp" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="getFullPersonResponse">
         <xs:complexType>
@@ -107,14 +140,6 @@
         </xs:complexType>
     </xs:element>
 
-<!--    <xs:simpleType name="personsFullInfoList">-->
-<!--        <xs:list itemType='tns:personFull'/>-->
-<!--    </xs:simpleType>-->
-
-<!--    <xs:simpleType name="personsPartialInfoList">-->
-<!--        <xs:list itemType='tns:personPartial'/>-->
-<!--    </xs:simpleType>-->
-
 <!--    DTO-->
 
     <xs:complexType name="personPartial">
@@ -137,23 +162,20 @@
 
     <xs:complexType name="personFull">
         <xs:sequence>
-            <xs:element name="id" type="xs:string"/>
-
-            <xs:element name="name" type="xs:string"/>
-            <xs:element name="surname" type="xs:string"/>
-            <xs:element name="phone" type="xs:string"/>
-            <xs:element name="email" type="xs:string"/>
-
-            <xs:element name="address" type="tns:address"/>
-            <xs:element name="questStatus" type="tns:questStatus"/>
-            <xs:element name="skillSet" type="tns:skillSet"/>
-            <xs:element name="stats" type="tns:stats"/>
-            <xs:element name="perksSet" type="tns:perksSet"/>
-
-            <xs:element name="createdDate" type="xs:string"/>
-            <xs:element name="createdBy" type="xs:string"/>
-            <xs:element name="modifiedDate" type="xs:string"/>
-            <xs:element name="modifiedBy" type="xs:string"/>
+            <xs:element name="id"             type="xs:string"         minOccurs="0"/>
+            <xs:element name="name"           type="xs:string"          />
+            <xs:element name="surname"        type="xs:string"          />
+            <xs:element name="phone"          type="xs:string"          />
+            <xs:element name="email"          type="xs:string"          />
+            <xs:element name="address"        type="tns:address"        />
+            <xs:element name="questStatus"    type="tns:questStatus"    />
+            <xs:element name="skillSet"       type="tns:skillSet"       />
+            <xs:element name="stats"          type="tns:stats"          />
+            <xs:element name="perksSet"       type="tns:perksSet"       />
+            <xs:element name="createdDate"    type="xs:string"         minOccurs="0" />
+            <xs:element name="createdBy"      type="xs:string"         minOccurs="0" />
+            <xs:element name="modifiedDate"   type="xs:string"         minOccurs="0" />
+            <xs:element name="modifiedBy"     type="xs:string"         minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
 
@@ -169,7 +191,7 @@
 
     <xs:complexType name="questStatus">
         <xs:sequence>
-            <xs:element name="id" type="xs:string"/>
+            <xs:element name="id" type="xs:string" minOccurs="0"/>
 
             <xs:element name="findJohn" type="xs:boolean"/>
             <xs:element name="killMary" type="xs:boolean"/>
@@ -177,16 +199,16 @@
             <xs:element name="casinoRobbery" type="xs:boolean"/>
             <xs:element name="steelPainting" type="xs:boolean"/>
 
-            <xs:element name="createdDate" type="xs:string"/>
-            <xs:element name="createdBy" type="xs:string"/>
-            <xs:element name="modifiedDate" type="xs:string"/>
-            <xs:element name="modifiedBy" type="xs:string"/>
+            <xs:element name="createdDate" type="xs:string" minOccurs="0"/>
+            <xs:element name="createdBy" type="xs:string" minOccurs="0"/>
+            <xs:element name="modifiedDate" type="xs:string" minOccurs="0"/>
+            <xs:element name="modifiedBy" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="skillSet">
         <xs:sequence>
-            <xs:element name="id" type="xs:string"/>
+            <xs:element name="id" type="xs:string" minOccurs="0"/>
 
             <xs:element name="gambling" type="xs:int"/>
             <xs:element name="pickpocketing" type="xs:int"/>
@@ -198,16 +220,16 @@
             <xs:element name="barter" type="xs:int"/>
             <xs:element name="speechcraft" type="xs:int"/>
 
-            <xs:element name="createdDate" type="xs:string"/>
-            <xs:element name="createdBy" type="xs:string"/>
-            <xs:element name="modifiedDate" type="xs:string"/>
-            <xs:element name="modifiedBy" type="xs:string"/>
+            <xs:element name="createdDate" type="xs:string" minOccurs="0"/>
+            <xs:element name="createdBy" type="xs:string" minOccurs="0"/>
+            <xs:element name="modifiedDate" type="xs:string" minOccurs="0"/>
+            <xs:element name="modifiedBy" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="stats">
         <xs:sequence>
-            <xs:element name="id" type="xs:string"/>
+            <xs:element name="id" type="xs:string" minOccurs="0"/>
 
             <xs:element name="strength" type="xs:int"/>
             <xs:element name="endurance" type="xs:int"/>
@@ -217,10 +239,10 @@
             <xs:element name="personality" type="xs:int"/>
             <xs:element name="luck" type="xs:int"/>
 
-            <xs:element name="createdDate" type="xs:string"/>
-            <xs:element name="createdBy" type="xs:string"/>
-            <xs:element name="modifiedDate" type="xs:string"/>
-            <xs:element name="modifiedBy" type="xs:string"/>
+            <xs:element name="createdDate" type="xs:string" minOccurs="0"/>
+            <xs:element name="createdBy" type="xs:string" minOccurs="0"/>
+            <xs:element name="modifiedDate" type="xs:string" minOccurs="0"/>
+            <xs:element name="modifiedBy" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 

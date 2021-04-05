@@ -8,6 +8,7 @@ import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
@@ -20,8 +21,13 @@ public interface PersonMapper {
     @Mapping(source = "id", target = "id")
     PersonDTO toDTO(PersonDAO person);
 
-    @Mapping(source = "id", target = "id")
+    @Mapping(source = "id", target = "id", qualifiedByName = "IdValidation")
     PersonDAO toDAO(PersonDTO personDTO);
+
+    @Mapping(source = "id", target = "id", ignore = true)
+    @Mapping(source = "createdDate", target = "createdDate", ignore = true)
+    @Mapping(source = "modifiedDate", target = "modifiedDate", ignore = true)
+    PersonDTO toDTO(PersonFull personFull);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "createdDate", target = "createdDate", qualifiedByName = "InstantToString")
@@ -47,5 +53,10 @@ public interface PersonMapper {
     @Named("InstantToString")
     default String convertInstantToString(Instant instant) {
         return dateFormat.format(instant);
+    }
+
+    @Named("IdValidation")
+    default String idValidator(String id) {
+        return (id != null && id.isEmpty()) ? null : id;
     }
 }

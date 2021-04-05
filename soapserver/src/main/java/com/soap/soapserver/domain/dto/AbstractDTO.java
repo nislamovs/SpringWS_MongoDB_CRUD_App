@@ -14,7 +14,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class AbstractDTO {
+public class AbstractDTO {
 
     private String id;
     private Instant createdDate;

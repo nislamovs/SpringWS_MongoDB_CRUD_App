@@ -4,14 +4,13 @@ import com.soap.soapserver.converters.mappers.PersonMapper;
 import com.soap.soapserver.domain.dto.PersonDTO;
 import com.soap.soapserver.domain.exceptions.PersonNotFoundException;
 import com.soap.soapserver.models.PersonDAO;
+import com.soap.soapserver.repository.MongoOperations;
 import com.soap.soapserver.repository.PersonsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.String.format;
@@ -23,6 +22,8 @@ import static org.springframework.data.domain.PageRequest.of;
 public class PersonService {
 
     private final PersonsRepository personRepository;
+    private final MongoOperations mongoOps;
+
     private final PersonMapper personMapper;
 
     @Transactional(readOnly = true)
@@ -51,13 +52,11 @@ public class PersonService {
 
     @Transactional(readOnly = true)
     public List<PersonDAO> retrievePartialPersonInfoList(int page, int size) {
-        System.out.println("Partial >>>   "+size + "  "+ page);
         return personRepository.findAllPartialPersonInfo(page*size, size);
     }
 
     @Transactional(readOnly = true)
     public List<PersonDAO> retrieveFullPersonInfoList(int page, int size) {
-        System.out.println("Full >>>   "+size + "  "+ page);
         return personRepository.findAllFullPersonInfo(page*size, size);
     }
 
@@ -72,22 +71,23 @@ public class PersonService {
         return personRepository.findFullPersonInfoByNameAndSurname(firstname, lastname)
                 .orElseThrow(() -> new PersonNotFoundException(format("Person by name, surname '%s, %s' was not found", firstname, lastname)));
     }
+
     ///////////////////////
 
-
-
     @Transactional
-    public PersonDAO createNewPerson(PersonDTO personDTO) {
-        return personRepository.save(personMapper.toDAO(personDTO));
+    public void createNewPerson(PersonDTO personDTO) {
+//        personRepository.createNewPerson(personMapper.toDAO(personDTO));
+        personRepository.save(personMapper.toDAO(personDTO));
     }
 
     @Transactional
-    public PersonDAO editPersonData(PersonDTO personDTO, String personId) {
-        return personRepository.save(personMapper.toDAO(personDTO).toBuilder().id(personId).build());
+    public void editPersonData(PersonDTO personDTO, String personId) {
+//        personRepository.updateExistingPerson(personMapper.toDAO(personDTO).toBuilder().id(personId).build());
+        personRepository.save(personMapper.toDAO(personDTO).toBuilder().id(personId).build());
     }
 
     @Transactional
     public void deletePersonById(String personId) {
-        personRepository.deleteById(personId);
+        mongoOps.deleteWithOrphans(personId);
     }
 }

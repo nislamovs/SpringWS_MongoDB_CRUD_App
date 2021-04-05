@@ -106,8 +106,19 @@ Test this :
 - @Action soap annotation
 - @SoapHeader
 
--- create validation for rest dto's (@Valid)
--- create search in db ignoring case
+-- create validation for rest dto's (@Valid, @Validated)
+-- create search in db ignoring case (firstname, lastname)
+-- implement mongodb requests for quests, skills, stats in java
+-- split persons.xsd to quests, skills, stats xsd schemas
+
+-- use @exists query
+-- use @count query
+
+-- finish create/update/delete methods
+    cascade save/update/delete
+
+-- create deleteWithOrphans method using criteria builder with aggregation
+
 
 --Sources:
 
@@ -119,3 +130,21 @@ https://stackoverflow.com/questions/12385920/spring-mongodb-storing-retrieving-e
 http://www.netkiller.cn/java/spring/data/spring-data-mongodb.html
 https://stackoverflow.com/questions/50077611/cannot-resolve-reference-to-bean-mongotemplate-while-setting-bean-property-mo
 https://www.baeldung.com/x-509-authentication-in-spring-security
+
+------------------------------------------------------------------------------------------------------------------------
+
+--Possible problems with mapstruct dependency:
+
+If during project building You have problem to obtain mapstruct pom or jar, You need to visit jcenter url
+and get pem keys [pem and chain] from there [using browser].
+
+Then add those certificates to Java keystore.
+
+First, convert your certificate in a DER format :
+`openssl x509 -outform der -in certificate.pem -out certificate.der`
+
+And after, import it in the keystore :
+keytool -import -alias your-alias -keystore cacerts -file certificate.der
+
+
+Links: https://stackoverflow.com/questions/2138940/import-pem-into-java-key-store

@@ -1,8 +1,11 @@
 package com.soap.soapclient.configuration;
 
+import com.soap.soapclient.domain.dto.*;
 import com.soap.soapclient.domain.dto.properties.WsClientProperties;
 import com.soap.soapclient.domain.dto.properties.WsSslProperties;
+import com.soap.soapclient.mappers.PersonMapper;
 import com.soap.soapclient.services.PersonsClient;
+import com.soap.soapclient.wsdl.*;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ssl.DefaultHostnameVerifier;
@@ -132,14 +135,13 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     @Bean
     public PersonsClient personsClient(Jaxb2Marshaller marshaller,
                                        WebServiceTemplate webServiceTemplate,
-                                       WsClientProperties wsClientProperties) {
+                                       WsClientProperties wsClientProperties,
+                                       PersonMapper personMapper) {
 
-        PersonsClient client = new PersonsClient(webServiceTemplate, wsClientProperties);
+        PersonsClient client = new PersonsClient(webServiceTemplate, wsClientProperties, personMapper);
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
         return client;
     }
-
-
 
 }

@@ -2,6 +2,7 @@ package com.soap.soapserver.endpoints.REST;
 
 
 import com.soap.soapserver.converters.mappers.PersonMapper;
+import com.soap.soapserver.domain.dto.AbstractDTO;
 import com.soap.soapserver.domain.dto.PersonDTO;
 import com.soap.soapserver.domain.dto.PersonDefaultResponseDTO;
 import com.soap.soapserver.services.PersonService;
@@ -62,23 +63,28 @@ public class PersonsController {
                           : ok(personService.retrievePartialPersonInfoList(page, size).stream().map(personMapper::toDTO).collect(toList()));
     }
 
+
     @PostMapping("/persons")
     public ResponseEntity<?> createPerson(@RequestBody PersonDTO person) {
 
-        return ok(personMapper.toDTO(personService.createNewPerson(person)));
+        personService.createNewPerson(person);
+
+        return ok(AbstractDTO.builder().modifiedDate(now()).id(person.getId()).build());
     }
 
     @PutMapping("/persons/{personId}")
     public ResponseEntity<?> editPerson(@PathVariable("personId") @NotBlank String personId,
                                         @RequestBody PersonDTO person) {
 
-        return ok(personMapper.toDTO(personService.editPersonData(person, personId)));
+        personService.editPersonData(person, personId);
+
+        return ok(AbstractDTO.builder().modifiedDate(now()).id(personId).build());
     }
 
     @DeleteMapping("/persons/{personId}")
     public ResponseEntity<?> deletePerson(@PathVariable("personId") @NotBlank String personId) {
         personService.deletePersonById(personId);
 
-        return ok(PersonDefaultResponseDTO.builder().id(personId).modifiedDate(now()).build());
+        return ok(AbstractDTO.builder().modifiedDate(now()).id(personId).build());
     }
 }
