@@ -12,9 +12,10 @@ import java.time.Instant;
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class AbstractDocument {
+public class AbstractDocument {
 
     @Id
+    @Field(name="_id")
     private String id;
 
     @Field(name="createdDate")

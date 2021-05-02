@@ -1,0 +1,48 @@
+{
+  "id": "608e00aa793fa3389da6ffe9",
+  "name": "Vasja",
+  "surname": "Ivanov",
+  "phone": "3453356684",
+  "email": "vasja.ivanov@inbox.lv",
+  "address": {
+    "country": "Latvia",
+    "city": "Riga",
+    "province": "Rigas rajons",
+    "street": "Brivibas iela 1, 12",
+    "postcode": "LV-5321"
+  },
+  "questStatus": {
+    "id": "608e00aa793fa3389da6ffe1",
+    "findJohn": false,
+    "killMary": false,
+    "steelCar": false,
+    "casinoRobbery": false,
+    "steelPainting": true
+  },
+  "skillSet": {
+    "id": "608e00aa793fa3389da6ffe2",
+    "gambling": 123,
+    "pickpocketing": 66,
+    "lockpicking": 86,
+    "technology": 33,
+    "martialArts": 88,
+    "lightWeapons": 34,
+    "heavyWeapons": 17,
+    "barter": 56,
+    "speechcraft": 11
+  },
+  "stats": {
+    "id": "608e00aa793fa3389da6ffe3",
+    "strength": 66,
+    "endurance": 23,
+    "dexterity": 93,
+    "intellect": 12,
+    "attention": 83,
+    "personality": 74,
+    "luck": 12
+  },
+  "perksSet": [
+    "MR_FIXIT",
+    "POLICE_ALLY"
+  ]
+}

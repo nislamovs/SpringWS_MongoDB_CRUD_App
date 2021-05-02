@@ -4,24 +4,32 @@ import com.soap.soapserver.domain.dto.PersonDTO;
 import com.soap.soapserver.models.PersonDAO;
 import https.localhost._8443.api.v1.ws.persons.PersonFull;
 import https.localhost._8443.api.v1.ws.persons.PersonPartial;
+import https.localhost._8443.api.v1.ws.persons.Stats;
+import org.bson.types.ObjectId;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+import static java.lang.String.format;
+import static org.mapstruct.NullValueMappingStrategy.RETURN_DEFAULT;
+
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 @Component
-public interface PersonMapper {
+public interface PersonMapper extends QuestStatusMapper, SkillsetMapper, StatsMapper {
 
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
 
     @Mapping(source = "id", target = "id")
     PersonDTO toDTO(PersonDAO person);
 
-    @Mapping(source = "id", target = "id", qualifiedByName = "IdValidation")
+    @BeanMapping(nullValueMappingStrategy = RETURN_DEFAULT, qualifiedByName = "IdConversionToDao")
+    @Mapping(source = "id", target = "id", qualifiedByName = "IdConversionToDao")
+    @Mapping(source = "questStatus", target = "questStatus", qualifiedByName = "questStatusConversion")
+    @Mapping(source = "stats", target = "stats", qualifiedByName = "statsConversion")
+    @Mapping(source = "skillSet", target = "skillSet", qualifiedByName = "skillsetConversion")
     PersonDAO toDAO(PersonDTO personDTO);
 
     @Mapping(source = "id", target = "id", ignore = true)
@@ -55,8 +63,8 @@ public interface PersonMapper {
         return dateFormat.format(instant);
     }
 
-    @Named("IdValidation")
+    @Named("IdConversionToDao")
     default String idValidator(String id) {
-        return (id != null && id.isEmpty()) ? null : id;
+        return (id == null || id.isEmpty()) ? format("ObjectId(\"%s\")", new ObjectId().toString()) : id;
     }
 }

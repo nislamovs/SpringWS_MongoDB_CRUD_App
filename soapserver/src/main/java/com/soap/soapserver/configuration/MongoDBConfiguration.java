@@ -1,21 +1,26 @@
 package com.soap.soapserver.configuration;
 
-import com.soap.soapserver.converters.mongoConverters.dateConverters.InstantToStringConverter;
-import com.soap.soapserver.converters.mongoConverters.dateConverters.LocalDateToStringConverter;
-import com.soap.soapserver.converters.mongoConverters.dateConverters.StringToInstantConverter;
-import com.soap.soapserver.converters.mongoConverters.dateConverters.StringToLocalDateConverter;
+import com.soap.soapserver.configuration.fieldCascadePersistenceSetup.CascadingMongoEventListener;
+import com.soap.soapserver.converters.mongoConverters.dateConverters.*;
 import lombok.SneakyThrows;
 import net.ozwolf.mongo.migrations.MongoTrek;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
-import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.convert.*;
+import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static de.flapdoodle.embed.mongo.Command.Mongo;
 
 
 @Configuration
@@ -31,6 +36,9 @@ public class MongoDBConfiguration {
     String changeLogName;
     @Value(value = "${application.property.mongotrek.script.path}")
     String changeLogLocation;
+
+    @Autowired MongoDatabaseFactory mongoDbFactory;
+    @Autowired MongoMappingContext mongoMappingContext;
 
     @Bean
     @SneakyThrows
@@ -50,6 +58,11 @@ public class MongoDBConfiguration {
     }
 
     @Bean
+    public CascadingMongoEventListener cascadingMongoEventListener() {
+        return new CascadingMongoEventListener();
+    }
+
+    @Bean
     public MongoCustomConversions customConversions() {
         List<Converter> converters = new ArrayList<>();
 
@@ -61,5 +74,14 @@ public class MongoDBConfiguration {
         return new MongoCustomConversions(converters);
     }
 
+    @Bean
+    public MappingMongoConverter mappingMongoConverter() {
 
+        //getting rid of _class
+        DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoDbFactory);
+        MappingMongoConverter converter = new MappingMongoConverter(dbRefResolver, mongoMappingContext);
+        converter.setTypeMapper(new DefaultMongoTypeMapper(null));
+
+        return converter;
+    }
 }

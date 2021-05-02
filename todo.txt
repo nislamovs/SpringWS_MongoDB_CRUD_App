@@ -2,8 +2,8 @@
 
 - Add folder with scripts for tomcat/docker/etc                                                                     OK
 
-- Create scripts for soap testing                                                                                   --
-- Create scripts for rest testing                                                                                   --
+- Create bash scripts for soap testing                                                                              --
+- Create bash scripts for rest testing                                                                              --
 
 - Create database for mongodb                                                                                       OK
 
@@ -98,7 +98,7 @@ Database:                                                                       
 
 - Add security (basic auth)                                                                                         --
 
--Add scripts for keys generation for server and client                                                              --
+-Add scripts for ssl keys generation for server and client                                                          --
 move webserviceTemplate as a bean to configuration and create method for usage in client Service                    --
 
 Test this :

@@ -1,6 +1,7 @@
 package com.soap.soapserver.services;
 
 import com.soap.soapserver.converters.mappers.PersonMapper;
+import com.soap.soapserver.converters.mappers.QuestStatusMapper;
 import com.soap.soapserver.domain.dto.PersonDTO;
 import com.soap.soapserver.domain.exceptions.PersonNotFoundException;
 import com.soap.soapserver.models.PersonDAO;
@@ -8,6 +9,7 @@ import com.soap.soapserver.repository.MongoOperations;
 import com.soap.soapserver.repository.PersonsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,7 @@ public class PersonService {
     private final MongoOperations mongoOps;
 
     private final PersonMapper personMapper;
+//    private final QuestStatusMapper questStatusMapper;
 
     @Transactional(readOnly = true)
     public PersonDAO retrievePartialPersonInfoById(String personId) {
@@ -76,8 +79,26 @@ public class PersonService {
 
     @Transactional
     public void createNewPerson(PersonDTO personDTO) {
+
+
+
+        System.out.println("------------------------------------------------------------");
+        System.out.println(new ObjectId().toString());
+        System.out.println("------------------------------------------------------------");
+
+        System.out.println("------------------------------------------------------------");
+        System.out.println(personDTO.toString());
+        System.out.println("------------------------------------------------------------");
+
+        System.out.println("------------------------------------------------------------");
+        PersonDAO pp = personMapper.toDAO(personDTO);
+        System.out.println(pp.toString());
+        System.out.println(pp.getId());
+        System.out.println(pp.getSkillSet().getId());
+        System.out.println("------------------------------------------------------------");
+
 //        personRepository.createNewPerson(personMapper.toDAO(personDTO));
-        personRepository.save(personMapper.toDAO(personDTO));
+        personRepository.save(pp);
     }
 
     @Transactional

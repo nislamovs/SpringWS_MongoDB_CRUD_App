@@ -1,6 +1,7 @@
 package com.soap.soapserver.models;
 
 
+import com.soap.soapserver.configuration.fieldCascadePersistenceSetup.CascadeSave;
 import com.soap.soapserver.domain.enums.Perks;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -38,16 +39,16 @@ public class PersonDAO extends AbstractDocument {
     private Address address;
 
     @DBRef(db = "characters", lazy = false)
-    @Builder.Default
-    private QuestStatusDAO questStatus = new QuestStatusDAO();
+    @CascadeSave
+    private QuestStatusDAO questStatus;
 
     @DBRef(db = "characters", lazy = false)
-//    @Builder.Default
-    private SkillSetDAO skillSet = new SkillSetDAO();
+    @CascadeSave
+    private SkillSetDAO skillSet;
 
     @DBRef(db = "characters", lazy = false)
-//    @Builder.Default
-    private StatsDAO stats = new StatsDAO();
+    @CascadeSave
+    private StatsDAO stats;
 
     @Field(name = "perksSet")
     private Set<Perks> perksSet;

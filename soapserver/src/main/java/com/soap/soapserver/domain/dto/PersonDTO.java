@@ -23,12 +23,9 @@ public class PersonDTO extends AbstractDTO {
     private String email;
     private Address address;
 
-    @Builder.Default
-    private QuestStatusDTO questStatus = new QuestStatusDTO();
-    @Builder.Default
-    private SkillSetDTO skillSet = new SkillSetDTO();
-    @Builder.Default
-    private StatsDTO stats = new StatsDTO();
+    private QuestStatusDTO questStatus;
+    private SkillSetDTO skillSet;
+    private StatsDTO stats;
 
     private Set<Perks> perksSet;
 }
