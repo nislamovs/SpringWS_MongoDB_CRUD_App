@@ -1,6 +1,6 @@
 package com.soap.soapserver.configuration;
 
-import com.soap.soapserver.configuration.fieldCascadePersistenceSetup.CascadingMongoEventListener;
+import com.soap.soapserver.configuration.event.CascadeSaveMongoEventListener;
 import com.soap.soapserver.converters.mongoConverters.dateConverters.*;
 import lombok.SneakyThrows;
 import net.ozwolf.mongo.migrations.MongoTrek;
@@ -10,17 +10,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
-import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.convert.*;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static de.flapdoodle.embed.mongo.Command.Mongo;
 
 
 @Configuration
@@ -57,10 +53,21 @@ public class MongoDBConfiguration {
         return trek;
     }
 
+//    @Bean
+//    public CascadingMongoEventListener cascadingMongoEventListener() {
+//        return new CascadingMongoEventListener();
+//    }
+
+//    @Bean
+//    public PersonCascadeSaveMongoEventListener personCascadingMongoEventListener() {
+//        return new PersonCascadeSaveMongoEventListener();
+//    }
+
     @Bean
-    public CascadingMongoEventListener cascadingMongoEventListener() {
-        return new CascadingMongoEventListener();
+    public CascadeSaveMongoEventListener cascadingMongoEventListener() {
+        return new CascadeSaveMongoEventListener();
     }
+
 
     @Bean
     public MongoCustomConversions customConversions() {

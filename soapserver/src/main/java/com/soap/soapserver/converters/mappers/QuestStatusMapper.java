@@ -6,6 +6,10 @@ import org.bson.types.ObjectId;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 import static java.lang.String.format;
 import static org.mapstruct.NullValueMappingStrategy.RETURN_DEFAULT;
 
@@ -13,16 +17,37 @@ import static org.mapstruct.NullValueMappingStrategy.RETURN_DEFAULT;
 @Component
 public interface QuestStatusMapper {
 
+    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
+
     @Mapping(source = "id", target = "id")
     QuestStatusDTO toDTO(QuestStatusDAO questStatus);
 
+    @Named("questStatusConversion")
     @BeanMapping(nullValueMappingStrategy = RETURN_DEFAULT, qualifiedByName = "IdConversionToDao")
     @Mapping(source = "id", target = "id", qualifiedByName = "IdConversionToDao")
-    @Named("questStatusConversion")
+    @Mapping(source = "createdDate", target = "createdDate", qualifiedByName = "InstantToString")
+    @Mapping(source = "modifiedDate", target = "modifiedDate", qualifiedByName = "InstantToString")
+    @Mapping(source = "createdBy", target = "createdBy", qualifiedByName = "setCreatedBy")
+    @Mapping(source = "modifiedBy", target = "modifiedBy", qualifiedByName = "setModifiedBy")
     QuestStatusDAO toDAO(QuestStatusDTO questStatusDTO);
 
     @Named("IdConversionToDao")
     default String idValidator(String id) {
         return (id == null || id.isEmpty()) ? format("ObjectId(\"%s\")", new ObjectId().toString()) : id;
+    }
+
+    @Named("InstantToString")
+    default String convertInstantToString(Instant instant) {
+        return (instant == null) ? dateFormat.format(Instant.now()) : dateFormat.format(instant);
+    }
+
+    @Named("setCreatedBy")
+    default String setCreatedBy(String createdBy) {
+        return createdBy == null ? "Admin" : createdBy;
+    }
+
+    @Named("setModifiedBy")
+    default String setModifiedBy(String modifiedBy) {
+        return modifiedBy == null ? "Admin" : modifiedBy;
     }
 }

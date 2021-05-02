@@ -1,4 +1,4 @@
-package com.soap.soapserver.configuration.fieldCascadePersistenceSetup;
+package com.soap.soapserver.configuration.event;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

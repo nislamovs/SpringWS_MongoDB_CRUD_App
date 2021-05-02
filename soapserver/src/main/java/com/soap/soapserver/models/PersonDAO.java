@@ -1,7 +1,7 @@
 package com.soap.soapserver.models;
 
 
-import com.soap.soapserver.configuration.fieldCascadePersistenceSetup.CascadeSave;
+import com.soap.soapserver.configuration.event.CascadeSave;
 import com.soap.soapserver.domain.enums.Perks;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -20,6 +20,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Document(collection = "persons")
 @TypeAlias("persons")
+@ToString(callSuper = true)
 public class PersonDAO extends AbstractDocument {
 
     @Field(name = "name")

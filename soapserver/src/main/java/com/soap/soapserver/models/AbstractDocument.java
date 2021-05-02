@@ -18,20 +18,20 @@ public class AbstractDocument {
     @Field(name="_id")
     private String id;
 
-    @Field(name="createdDate")
     @CreatedDate
+    @Field(name="createdDate")
     private Instant createdDate;
 
-    @Field(name="createdBy")
     @CreatedBy
+    @Field(name="createdBy")
     private String createdBy;
 
-    @Field(name="modifiedDate")
     @LastModifiedDate
+    @Field(name="modifiedDate")
     private Instant modifiedDate;
 
-    @Field(name="modifiedBy")
     @LastModifiedBy
+    @Field(name="modifiedBy")
     private String modifiedBy;
 
 //    @Field(name="version")

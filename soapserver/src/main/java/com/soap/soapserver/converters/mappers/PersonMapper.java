@@ -14,6 +14,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import static java.lang.String.format;
+import static java.time.LocalDate.now;
 import static org.mapstruct.NullValueMappingStrategy.RETURN_DEFAULT;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -30,6 +31,10 @@ public interface PersonMapper extends QuestStatusMapper, SkillsetMapper, StatsMa
     @Mapping(source = "questStatus", target = "questStatus", qualifiedByName = "questStatusConversion")
     @Mapping(source = "stats", target = "stats", qualifiedByName = "statsConversion")
     @Mapping(source = "skillSet", target = "skillSet", qualifiedByName = "skillsetConversion")
+    @Mapping(source = "createdDate", target = "createdDate", qualifiedByName = "InstantToString")
+    @Mapping(source = "modifiedDate", target = "modifiedDate", qualifiedByName = "InstantToString")
+    @Mapping(source = "createdBy", target = "createdBy", qualifiedByName = "setCreatedBy")
+    @Mapping(source = "modifiedBy", target = "modifiedBy", qualifiedByName = "setModifiedBy")
     PersonDAO toDAO(PersonDTO personDTO);
 
     @Mapping(source = "id", target = "id", ignore = true)
@@ -58,9 +63,21 @@ public interface PersonMapper extends QuestStatusMapper, SkillsetMapper, StatsMa
 //        return Instant.ofEpochMilli(value.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
 //    }
 //
+    @Named("setCreatedBy")
+    default String setCreatedBy(String createdBy) {
+        return createdBy == null ? "Admin" : createdBy;
+    }
+
+    @Named("setModifiedBy")
+    default String setModifiedBy(String modifiedBy) {
+        return modifiedBy == null ? "Admin" : modifiedBy;
+    }
+
     @Named("InstantToString")
     default String convertInstantToString(Instant instant) {
-        return dateFormat.format(instant);
+        System.out.println(instant);
+        System.out.println(dateFormat.format(Instant.now()));
+        return (instant == null) ? dateFormat.format(Instant.now()) : dateFormat.format(instant);
     }
 
     @Named("IdConversionToDao")
