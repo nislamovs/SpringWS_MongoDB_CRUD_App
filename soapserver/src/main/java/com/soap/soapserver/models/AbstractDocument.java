@@ -34,7 +34,7 @@ public class AbstractDocument {
     @Field(name="modifiedBy")
     private String modifiedBy;
 
-//    @Field(name="version")
-//    @Version
-//    private Long version;
+    @Field(name="version")
+    @Version
+    private Long version;
 }
