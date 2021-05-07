@@ -78,27 +78,9 @@ public class PersonService {
     ///////////////////////
 
     @Transactional
-    public void createNewPerson(PersonDTO personDTO) {
-
-
-
-        System.out.println("------------------------------------------------------------");
-        System.out.println(new ObjectId().toString());
-        System.out.println("------------------------------------------------------------");
-
-        System.out.println("------------------------------------------------------------");
-        System.out.println(personDTO.toString());
-        System.out.println("------------------------------------------------------------");
-
-        System.out.println("------------------------------------------------------------");
-        PersonDAO pp = personMapper.toDAO(personDTO);
-        System.out.println(pp.toString());
-        System.out.println(pp.getId());
-        System.out.println(pp.getSkillSet().getId());
-        System.out.println("------------------------------------------------------------");
-
-//        personRepository.createNewPerson(personMapper.toDAO(personDTO));
-        personRepository.save(pp);
+    public PersonDTO createNewPerson(PersonDTO personDTO) {
+        PersonDAO newPerson = personRepository.save(personMapper.toDAO(personDTO));
+        return personMapper.toDTO(newPerson);
     }
 
     @Transactional

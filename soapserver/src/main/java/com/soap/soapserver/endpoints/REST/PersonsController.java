@@ -67,9 +67,9 @@ public class PersonsController {
     @PostMapping("/persons")
     public ResponseEntity<?> createPerson(@RequestBody PersonDTO person) {
 
-        personService.createNewPerson(person);
+        PersonDTO newPerson =  personService.createNewPerson(person);
 
-        return ok(AbstractDTO.builder().modifiedDate(now()).id(person.getId()).build());
+        return ok(AbstractDTO.builder().createdDate(now()).id(newPerson.getId()).build());
     }
 
     @PutMapping("/persons/{personId}")

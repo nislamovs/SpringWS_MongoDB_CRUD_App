@@ -114,6 +114,11 @@ Test this :
 -- use @exists query
 -- use @count query
 
+-- fix data retrieval queries                                                                                       OK
+
+-- rest return value after creating new person should return id
+
+
 -- finish create/update/delete methods
     cascade save/update/delete
 

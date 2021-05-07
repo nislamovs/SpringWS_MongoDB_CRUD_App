@@ -29,12 +29,15 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
     Optional<PersonDAO> findPartialPersonInfoById(String id);
 
     @Aggregation(pipeline = {
-            "{$lookup: {from: quests, localField: questStatus,  foreignField: _id,    as: questStatus}}",
-            "{$unwind: {path: $questStatus, preserveNullAndEmptyArrays: true}}",
-            "{$lookup: {from: skills, localField: skillSet,     foreignField: _id,    as: skillSet}}",
-            "{$unwind: {path: $skillSet, preserveNullAndEmptyArrays: true}}",
-            "{$lookup: {from: stats,  localField: stats,        foreignField: _id,    as: stats}}",
-            "{$unwind: {path: $stats, preserveNullAndEmptyArrays: true}}",
+//            "{$addFields: {quests: { $arrayElemAt: [{ $objectToArray: '$quests' }, 1] }, stats: { $arrayElemAt: [{ $objectToArray: '$stats' }, 1] }, skillSet: { $arrayElemAt: [{ $objectToArray: '$skillSet' }, 1] } } }",
+//            "{$addFields: {quests: '$quests.v', stats: '$stats.v', skillSet: '$skillSet.v'} }",
+//
+//            "{$lookup: {from: quests, localField: questStatus,  foreignField: _id,    as: questStatus}}",
+//            "{$unwind: {path: $questStatus, preserveNullAndEmptyArrays: true}}",
+//            "{$lookup: {from: skills, localField: skillSet,     foreignField: _id,    as: skillSet}}",
+//            "{$unwind: {path: $skillSet, preserveNullAndEmptyArrays: true}}",
+//            "{$lookup: {from: stats,  localField: stats,        foreignField: _id,    as: stats}}",
+//            "{$unwind: {path: $stats, preserveNullAndEmptyArrays: true}}",
             "{$match : {_id: 'ObjectId(\"?0\")'}}"
     })
     Optional<PersonDAO> findFullPersonInfoById(String id);
@@ -53,12 +56,12 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
     Optional<PersonDAO> findPartialPersonInfoByEmail(String email);
 
     @Aggregation(pipeline = {
-            "{$lookup: {from: quests, localField: questStatus,  foreignField: _id,    as: questStatus}}",
-            "{$unwind: {path: $questStatus, preserveNullAndEmptyArrays: true}}",
-            "{$lookup: {from: skills, localField: skillSet,     foreignField: _id,    as: skillSet}}",
-            "{$unwind: {path: $skillSet, preserveNullAndEmptyArrays: true}}",
-            "{$lookup: {from: stats,  localField: stats,        foreignField: _id,    as: stats}}",
-            "{$unwind: {path: $stats, preserveNullAndEmptyArrays: true}}",
+//            "{$lookup: {from: quests, localField: questStatus,  foreignField: _id,    as: questStatus}}",
+//            "{$unwind: {path: $questStatus, preserveNullAndEmptyArrays: true}}",
+//            "{$lookup: {from: skills, localField: skillSet,     foreignField: _id,    as: skillSet}}",
+//            "{$unwind: {path: $skillSet, preserveNullAndEmptyArrays: true}}",
+//            "{$lookup: {from: stats,  localField: stats,        foreignField: _id,    as: stats}}",
+//            "{$unwind: {path: $stats, preserveNullAndEmptyArrays: true}}",
             "{$match : {email: '?0'}}"
     })
     Optional<PersonDAO> findFullPersonInfoByEmail(String email);
@@ -77,12 +80,12 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
     Optional<PersonDAO> findPartialPersonInfoByNameAndSurname(String firstname, String lastname);
 
     @Aggregation(pipeline = {
-            "{$lookup: {from: quests, localField: questStatus,  foreignField: _id,    as: questStatus}}",
-            "{$unwind: {path: $questStatus, preserveNullAndEmptyArrays: true}}",
-            "{$lookup: {from: skills, localField: skillSet,     foreignField: _id,    as: skillSet}}",
-            "{$unwind: {path: $skillSet, preserveNullAndEmptyArrays: true}}",
-            "{$lookup: {from: stats,  localField: stats,        foreignField: _id,    as: stats}}",
-            "{$unwind: {path: $stats, preserveNullAndEmptyArrays: true}}",
+//            "{$lookup: {from: quests, localField: questStatus,  foreignField: _id,    as: questStatus}}",
+//            "{$unwind: {path: $questStatus, preserveNullAndEmptyArrays: true}}",
+//            "{$lookup: {from: skills, localField: skillSet,     foreignField: _id,    as: skillSet}}",
+//            "{$unwind: {path: $skillSet, preserveNullAndEmptyArrays: true}}",
+//            "{$lookup: {from: stats,  localField: stats,        foreignField: _id,    as: stats}}",
+//            "{$unwind: {path: $stats, preserveNullAndEmptyArrays: true}}",
             "{$match : {name: ?0, surname: ?1}}"
     })
     Optional<PersonDAO> findFullPersonInfoByNameAndSurname(String firstname, String lastname);
@@ -95,28 +98,28 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
     List<PersonDAO> findAllPartialPersonInfo(int skip, int limit);
 
     @Aggregation(pipeline = {
-            "{$lookup: {from: quests, localField: questStatus,  foreignField: _id,    as: questStatus}}",
-            "{$unwind: {path: $questStatus, preserveNullAndEmptyArrays: true}}",
-            "{$lookup: {from: skills, localField: skillSet,     foreignField: _id,    as: skillSet}}",
-            "{$unwind: {path: $skillSet, preserveNullAndEmptyArrays: true}}",
-            "{$lookup: {from: stats,  localField: stats,        foreignField: _id,    as: stats}}",
-            "{$unwind: {path: $stats, preserveNullAndEmptyArrays: true}}",
+//            "{$lookup: {from: quests, localField: questStatus,  foreignField: _id,    as: questStatus}}",
+//            "{$unwind: {path: $questStatus, preserveNullAndEmptyArrays: true}}",
+//            "{$lookup: {from: skills, localField: skillSet,     foreignField: _id,    as: skillSet}}",
+//            "{$unwind: {path: $skillSet, preserveNullAndEmptyArrays: true}}",
+//            "{$lookup: {from: stats,  localField: stats,        foreignField: _id,    as: stats}}",
+//            "{$unwind: {path: $stats, preserveNullAndEmptyArrays: true}}",
             "{$skip: ?0}",
             "{$limit: ?1}"
     })
     List<PersonDAO> findAllFullPersonInfo(int skip, int limit);
 
-    @Query(value="{'_id' : 'ObjectId(\"?0\")'}")
-    void createNewPerson(PersonDAO newPerson);
+//    @Query(value="{'_id' : 'ObjectId(\"?0\")'}")
+//    PersonDTO createNewPerson(PersonDAO newPerson);
+//
+//    @Query(value="{'_id' : 'ObjectId(\"?0\")'}")
+//    void updateExistingPerson(PersonDAO person);
+//
+//    @DeleteQuery(value="{'_id' : 'ObjectId(\"?0\")'}")
+//    void deletePersonById(String id);
 
-    @Query(value="{'_id' : 'ObjectId(\"?0\")'}")
-    void updateExistingPerson(PersonDAO person);
 
-    @DeleteQuery(value="{'_id' : 'ObjectId(\"?0\")'}")
-    void deletePersonById(String id);
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    ////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //    @Query("{ 'email' : ?0 }")
 //    Optional<PersonDAO> findPersonByEmail(String email);
 //

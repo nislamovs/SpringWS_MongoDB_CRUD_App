@@ -1,4 +1,20 @@
 db.getCollection('persons').aggregate([
+
+    {
+        $addFields: {
+            "questStatus": { $arrayElemAt: [{ $objectToArray: "$questStatus" }, 1] },
+            "stats": { $arrayElemAt: [{ $objectToArray: "$stats" }, 1] },
+            "skillSet": { $arrayElemAt: [{ $objectToArray: "$skillSet" }, 1] },
+        }
+    },
+    {
+        $addFields: {
+            "questStatus": "$questStatus.v",
+            "stats": "$stats.v",
+            "skillSet": "$skillSet.v"
+        }
+    },
+
     { $lookup:
         {
            from: "quests",
