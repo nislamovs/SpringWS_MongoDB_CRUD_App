@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Repository(value = "personsRepo")
 public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
 
     @Query(value = "{ '_id' : 'ObjectId(\"?0\")' }",
@@ -115,8 +115,8 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
 //    @Query(value="{'_id' : 'ObjectId(\"?0\")'}")
 //    void updateExistingPerson(PersonDAO person);
 //
-//    @DeleteQuery(value="{'_id' : 'ObjectId(\"?0\")'}")
-//    void deletePersonById(String id);
+    @DeleteQuery(value="{'_id' : 'ObjectId(\"?0\")'}")
+    void deletePersonById(String id);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

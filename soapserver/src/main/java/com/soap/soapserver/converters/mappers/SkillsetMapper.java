@@ -25,15 +25,20 @@ public interface SkillsetMapper {
     @Named("skillsetConversion")
     @BeanMapping(nullValueMappingStrategy = RETURN_DEFAULT, qualifiedByName = "IdConversionToDao")
     @Mapping(source = "id", target = "id", qualifiedByName = "IdConversionToDao")
-    @Mapping(source = "createdDate", target = "createdDate", qualifiedByName = "InstantToString")
-    @Mapping(source = "modifiedDate", target = "modifiedDate", qualifiedByName = "InstantToString")
+    @Mapping(source = "createdDate", target = "createdDate")
+    @Mapping(source = "modifiedDate", target = "modifiedDate")
     @Mapping(source = "createdBy", target = "createdBy", qualifiedByName = "setCreatedBy")
     @Mapping(source = "modifiedBy", target = "modifiedBy", qualifiedByName = "setModifiedBy")
     SkillSetDAO toDAO(SkillSetDTO skillSetDTO);
 
     @Named("IdConversionToDao")
     default String idValidator(String id) {
-        return (id == null || id.isEmpty()) ? format("ObjectId(\"%s\")", new ObjectId().toString()) : id;
+        if (id == null || id.isEmpty())
+            return format("ObjectId(\"%s\")", new ObjectId().toString());
+        if (!id.startsWith("ObjectId"))
+            return format("ObjectId(\"%s\")", id);
+
+        return id;
     }
 
     @Named("InstantToString")

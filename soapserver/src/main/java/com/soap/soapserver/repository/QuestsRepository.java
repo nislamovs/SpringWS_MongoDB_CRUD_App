@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+@Repository(value = "questsRepo")
 public interface QuestsRepository extends MongoRepository<QuestStatusDAO, String> {
 
     @Query(value = "{totalCount: 0}")

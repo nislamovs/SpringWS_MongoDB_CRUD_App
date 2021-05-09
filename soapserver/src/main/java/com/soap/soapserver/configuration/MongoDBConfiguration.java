@@ -1,6 +1,6 @@
 package com.soap.soapserver.configuration;
 
-import com.soap.soapserver.configuration.event.CascadeSaveMongoEventListener;
+import com.soap.soapserver.configuration.event.CascadeMongoEventListener;
 import com.soap.soapserver.converters.mongoConverters.dateConverters.*;
 import lombok.SneakyThrows;
 import net.ozwolf.mongo.migrations.MongoTrek;
@@ -53,21 +53,10 @@ public class MongoDBConfiguration {
         return trek;
     }
 
-//    @Bean
-//    public CascadingMongoEventListener cascadingMongoEventListener() {
-//        return new CascadingMongoEventListener();
-//    }
-
-//    @Bean
-//    public PersonCascadeSaveMongoEventListener personCascadingMongoEventListener() {
-//        return new PersonCascadeSaveMongoEventListener();
-//    }
-
     @Bean
-    public CascadeSaveMongoEventListener cascadingMongoEventListener() {
-        return new CascadeSaveMongoEventListener();
+    public CascadeMongoEventListener cascadingSaveMongoEventListener() {
+        return new CascadeMongoEventListener();
     }
-
 
     @Bean
     public MongoCustomConversions customConversions() {

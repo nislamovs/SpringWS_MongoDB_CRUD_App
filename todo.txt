@@ -116,15 +116,17 @@ Test this :
 
 -- fix data retrieval queries                                                                                       OK
 
--- rest return value after creating new person should return id
+-- rest return value after creating new person should return id                                                     OK
 
 
 -- finish create/update/delete methods
-    cascade save/update/delete
+    cascade save                                                                                                    OK
+    cascade update                                                                                                  --
+    cascade delete                                                                                                  OK
 
--- create deleteWithOrphans method using criteria builder with aggregation
+-- create deleteWithOrphans method using criteria builder with aggregation                                          --
 
--- enable auditing
+-- enable auditing                                                                                                  --
 
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -139,6 +141,8 @@ https://stackoverflow.com/questions/12385920/spring-mongodb-storing-retrieving-e
 http://www.netkiller.cn/java/spring/data/spring-data-mongodb.html
 https://stackoverflow.com/questions/50077611/cannot-resolve-reference-to-bean-mongotemplate-while-setting-bean-property-mo
 https://www.baeldung.com/x-509-authentication-in-spring-security
+
+https://mflash.dev/blog/2019/07/08/persisting-documents-with-mongorepository/
 
 ------------------------------------------------------------------------------------------------------------------------
 

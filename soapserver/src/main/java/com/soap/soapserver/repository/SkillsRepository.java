@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+@Repository(value = "skillsRepo")
 public interface SkillsRepository extends MongoRepository<SkillSetDAO, String> {
 
     @Query(value = "{totalCount: 0}")

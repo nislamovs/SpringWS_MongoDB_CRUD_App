@@ -1,5 +1,5 @@
 {
-  "id": "536f710fc55b2acc61000bd1",
+  "id": "6095a47871b4685609e04e2e",
   "createdDate": "2021-04-03T01:48:24Z",
   "createdBy": "admin",
   "modifiedDate": "2021-04-03T01:48:24Z",
@@ -16,19 +16,19 @@
     "postcode": "LV-5321"
   },
   "questStatus": {
-    "id": "536f710fc55b2acc61000ba1",
+    "id": "136f710fc55b2acc61000ba1",
     "createdDate": "2021-04-03T01:48:24.776Z",
     "createdBy": "admin",
     "modifiedDate": "2021-04-03T01:48:24.776Z",
     "modifiedBy": "admin",
     "findJohn": false,
-    "killMary": false,
+    "killMary": true,
     "steelCar": false,
     "casinoRobbery": false,
     "steelPainting": true
   },
   "skillSet": {
-    "id": "536f710fc55b2acc61000bc1",
+    "id": "136f710fc55b2acc61000bc1",
     "createdDate": "2021-04-03T01:48:24.782Z",
     "createdBy": "admin",
     "modifiedDate": "2021-04-03T01:48:24.782Z",
@@ -44,7 +44,7 @@
     "speechcraft": 11
   },
   "stats": {
-    "id": "536f710fc55b2acc61000bb1",
+    "id": "136f710fc55b2acc61000bb1",
     "createdDate": "2021-04-03T01:48:24.789Z",
     "createdBy": "admin",
     "modifiedDate": "2021-04-03T01:48:24.789Z",

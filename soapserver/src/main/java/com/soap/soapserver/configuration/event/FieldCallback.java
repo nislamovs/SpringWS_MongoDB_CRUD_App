@@ -1,11 +1,14 @@
 package com.soap.soapserver.configuration.event;
 
+import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 
 public class FieldCallback implements ReflectionUtils.FieldCallback {
+
+    @Getter
     private boolean idFound;
 
     @Override
@@ -15,9 +18,5 @@ public class FieldCallback implements ReflectionUtils.FieldCallback {
         if (field.isAnnotationPresent(Id.class)) {
             idFound = true;
         }
-    }
-
-    public boolean isIdFound() {
-        return idFound;
     }
 }

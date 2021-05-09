@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+@Repository(value = "statsRepo")
 public interface StatsRepository extends MongoRepository<StatsDAO, String> {
 
 

@@ -1,11 +1,16 @@
 package com.soap.soapserver.models;
 
 
+import com.soap.soapserver.repository.PersonsRepository;
+import com.soap.soapserver.repository.SkillsRepository;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.stereotype.Component;
 
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder(toBuilder = true)
@@ -14,6 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @NoArgsConstructor
 @Document(collection = "skills")
 @TypeAlias("skills")
+@ToString(callSuper = true)
 public class SkillSetDAO extends AbstractDocument {
 
         @Field(name="gambling")

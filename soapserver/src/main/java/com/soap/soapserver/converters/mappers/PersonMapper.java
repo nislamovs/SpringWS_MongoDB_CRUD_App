@@ -31,8 +31,8 @@ public interface PersonMapper extends QuestStatusMapper, SkillsetMapper, StatsMa
     @Mapping(source = "questStatus", target = "questStatus", qualifiedByName = "questStatusConversion")
     @Mapping(source = "stats", target = "stats", qualifiedByName = "statsConversion")
     @Mapping(source = "skillSet", target = "skillSet", qualifiedByName = "skillsetConversion")
-    @Mapping(source = "createdDate", target = "createdDate", qualifiedByName = "InstantToString")
-    @Mapping(source = "modifiedDate", target = "modifiedDate", qualifiedByName = "InstantToString")
+    @Mapping(source = "createdDate", target = "createdDate")
+    @Mapping(source = "modifiedDate", target = "modifiedDate")
     @Mapping(source = "createdBy", target = "createdBy", qualifiedByName = "setCreatedBy")
     @Mapping(source = "modifiedBy", target = "modifiedBy", qualifiedByName = "setModifiedBy")
     PersonDAO toDAO(PersonDTO personDTO);
@@ -82,6 +82,11 @@ public interface PersonMapper extends QuestStatusMapper, SkillsetMapper, StatsMa
 
     @Named("IdConversionToDao")
     default String idValidator(String id) {
-        return (id == null || id.isEmpty()) ? format("ObjectId(\"%s\")", new ObjectId().toString()) : id;
+        if (id == null || id.isEmpty())
+            return format("ObjectId(\"%s\")", new ObjectId().toString());
+        if (!id.startsWith("ObjectId"))
+            return format("ObjectId(\"%s\")", id);
+
+        return id;
     }
 }
