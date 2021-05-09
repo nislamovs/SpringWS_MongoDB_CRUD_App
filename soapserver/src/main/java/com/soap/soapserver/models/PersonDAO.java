@@ -41,17 +41,14 @@ public class PersonDAO extends AbstractDocument {
 
     @DBRef(db = "characters", lazy = false)
     @Cascade
-//    @CascadeDelete
     private QuestStatusDAO questStatus;
 
     @DBRef(db = "characters", lazy = false)
     @Cascade
-//    @CascadeDelete
     private SkillSetDAO skillSet;
 
     @DBRef(db = "characters", lazy = false)
     @Cascade
-//    @CascadeDelete
     private StatsDAO stats;
 
     @Field(name = "perksSet")
