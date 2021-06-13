@@ -1,11 +1,11 @@
-- Prepare script totalRebuild.sh                                                                                    OK
+- Prepare script totalRebuild.sh                                                                                     OK
 
-- Add folder with scripts for tomcat/docker/etc                                                                     OK
+- Add folder with scripts for tomcat/docker/etc                                                                      OK
 
-- Create bash scripts for soap testing                                                                              --
-- Create bash scripts for rest testing                                                                              --
+- Create bash scripts for soap testing                                                                               --
+- Create bash scripts for rest testing                                                                               --
 
-- Create database for mongodb                                                                                       OK
+- Create database for mongodb                                                                                        OK
 
 - Find out a way how to build docker images using latest version of gradle                                           OK
 - Setup lombok in latest gradle                                                                                      OK
@@ -84,16 +84,16 @@ Database:                                                                       
 - exceptions                                                                                                        OK
 - Mapstruct mappers                                                                                                 OK
 - Mongo converters                                                                                                  OK
-- create them static                                                                                                --
+- create them static                                                                                                NOT NEEDED
 
 - SOAP endpoints                                                                                                    --
 - Endpoints validation                                                                                              --
 - REST Endpoints  (server)                                                                                          --
 - REST Endpoints  (client)                                                                                          --
-- Exception handling  (REST)                                                                                        --
+- Exception handling  (REST)                                                                                        NOT NEEDED
 - Exception handling  (SOAP)                                                                                        --
 
-- services                                                                                                          --
+- services                                                                                                          OK
 - Mongo repositories                                                                                                OK
 
 - Add security (basic auth)                                                                                         --
@@ -103,22 +103,26 @@ move webserviceTemplate as a bean to configuration and create method for usage i
 
 Test this :
 
-- @Action soap annotation
-- @SoapHeader
+- @Action soap annotation                                                                                           --
+- @SoapHeader                                                                                                       --
 
--- create validation for rest dto's (@Valid, @Validated)
--- create search in db ignoring case (firstname, lastname)
--- implement mongodb requests for quests, skills, stats in java
--- split persons.xsd to quests, skills, stats xsd schemas
+-- create validation for rest dto's (@Valid, @Validated)                                                            --
+-- create search in db ignoring case (firstname, lastname)                                                          OK
+-- implement mongodb requests for quests, skills, stats in java                                                     OK
+-- split persons.xsd to quests, skills, stats xsd schemas                                                           --
 
--- use @exists query
--- use @count query
+-- use @exists query                                                                                                OK
+  -- exists by name, surname                                                                                        OK
+  -- exists by email                                                                                                OK
+
+-- use @count query                                                                                                 OK
+  -- persons count                                                                                                  OK
+  -- count by email domain                                                                                          OK
 
 -- fix data retrieval queries                                                                                       OK
-
 -- rest return value after creating new person should return id                                                     OK
 
-
+-- use stored procedure (stored javascript)                                                                         --
 -- finish create/update/delete methods
     cascade save                                                                                                    OK
     cascade update                                                                                                  --
@@ -143,6 +147,10 @@ https://stackoverflow.com/questions/50077611/cannot-resolve-reference-to-bean-mo
 https://www.baeldung.com/x-509-authentication-in-spring-security
 
 https://mflash.dev/blog/2019/07/08/persisting-documents-with-mongorepository/
+https://stackoverflow.com/questions/63561801/spring-data-mongo-db-duplicate-key-error-when-extending-a-base-domain-class
+https://dev.to/saurabh73/mongodb-using-aggregation-pipeline-to-extract-dbref-using-lookup-operator-4ekl
+
+https://docs.mongodb.com/realm/triggers/database-triggers/
 
 ------------------------------------------------------------------------------------------------------------------------
 

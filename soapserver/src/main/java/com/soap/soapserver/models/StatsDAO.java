@@ -1,17 +1,11 @@
 package com.soap.soapserver.models;
 
 
-import com.soap.soapserver.repository.SkillsRepository;
-import com.soap.soapserver.repository.StatsRepository;
-import https.localhost._8443.api.v1.ws.persons.Stats;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.stereotype.Component;
 
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder(toBuilder = true)

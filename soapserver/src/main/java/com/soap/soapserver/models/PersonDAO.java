@@ -4,6 +4,7 @@ package com.soap.soapserver.models;
 import com.soap.soapserver.configuration.event.Cascade;
 import com.soap.soapserver.domain.enums.Perks;
 import lombok.*;
+import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -21,6 +22,7 @@ import java.util.Set;
 @Document(collection = "persons")
 @TypeAlias("persons")
 @ToString(callSuper = true)
+@Accessors(chain = true)
 public class PersonDAO extends AbstractDocument {
 
     @Field(name = "name")

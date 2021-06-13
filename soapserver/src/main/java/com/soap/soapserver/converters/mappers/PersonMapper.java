@@ -14,7 +14,6 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import static java.lang.String.format;
-import static java.time.LocalDate.now;
 import static org.mapstruct.NullValueMappingStrategy.RETURN_DEFAULT;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -49,6 +48,10 @@ public interface PersonMapper extends QuestStatusMapper, SkillsetMapper, StatsMa
 
     @Mapping(source = "id", target = "id")
     PersonPartial simplify(PersonFull personFull);
+
+
+
+//    void updatePersonDAO(PersonDAO newPerson, PersonDAO oldPerson);
 
 //    @Mapping(source = "id", target = "id")
 //    @Mapping(source = "date", target = "date", qualifiedByName = "DateToLocalDate")

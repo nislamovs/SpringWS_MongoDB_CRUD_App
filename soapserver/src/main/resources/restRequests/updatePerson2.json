@@ -1,18 +1,25 @@
 {
-  "id": "536f710fc55b2acc61000bd1",
+  "id": "60c4f75a7da69563dcb90a6d",
+  "createdDate": "2021-04-03T01:48:24Z",
+  "createdBy": "admin",
+  "modifiedDate": "2021-04-03T01:48:24Z",
+  "modifiedBy": "admin",
   "name": "Vasja",
   "surname": "s1dfsd3311vbv1111111v333333",
   "phone": "3453356684",
-  "email": "vasja.ivanov@inbox.lv",
+  "email": "vasja.iva222222nov@inbox.lv",
   "address": {
-    "country": "Latvcvcvia",
+    "country": "Latvia",
     "city": "Riga",
-    "province": "Riagas rajons",
+    "province": "Rigas rajons",
     "street": "Brivibas iela 1, 12",
     "postcode": "LV-5321"
   },
   "questStatus": {
-    "id": "1136f710fc55b2acc61000ba1",
+    "createdDate": "2021-04-03T01:48:24.776Z",
+    "createdBy": "admfffin",
+    "modifiedDate": "2021-04-03T01:48:24.776Z",
+    "modifiedBy": "admin",
     "findJohn": false,
     "killMary": true,
     "steelCar": false,
@@ -20,9 +27,12 @@
     "steelPainting": true
   },
   "skillSet": {
-    "id": "1136f710fc55b2acc61000bc1",
+    "createdDate": "2021-04-03T01:48:24.782Z",
+    "createdBy": "admin",
+    "modifiedDate": "2021-04-03T01:48:24.782Z",
+    "modifiedBy": "admin",
     "gambling": 123,
-    "pickpocketing": 66,
+    "pickpocketing": 1166,
     "lockpicking": 86,
     "technology": 33,
     "martialArts": 88,
@@ -32,7 +42,10 @@
     "speechcraft": 11
   },
   "stats": {
-    "id": "1136f710fc55b2acc61000bb1",
+    "createdDate": "2021-04-03T01:48:24.789Z",
+    "createdBy": "admin",
+    "modifiedDate": "2021-04-03T01:48:24.789Z",
+    "modifiedBy": "admiccn",
     "strength": 66,
     "endurance": 23,
     "dexterity": 93,

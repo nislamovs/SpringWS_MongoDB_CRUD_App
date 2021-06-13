@@ -1,8 +1,7 @@
 package com.soap.soapserver.services;
 
 import com.soap.soapserver.domain.dto.SkillSetUpdatedDTO;
-import com.soap.soapserver.domain.exceptions.SkillNotFoundException;
-import com.soap.soapserver.repository.SkillsRepository;
+import com.soap.soapserver.repository.MongoOperations;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,12 +15,11 @@ import static java.time.Instant.now;
 @RequiredArgsConstructor
 public class SkillsService {
 
-    private final SkillsRepository skillsRepository;
+    private final MongoOperations mongoOperations;
 
     @Transactional
     public SkillSetUpdatedDTO updateSkillValue(String personEmail, String skillName, int skillValue) {
-        skillsRepository.updateSkillValue(personEmail, skillName, skillValue)
-                .orElseThrow(() -> new SkillNotFoundException(format("Skill by name '%s' was not found", skillName)));
+        mongoOperations.updateSkillValue(personEmail, skillName, skillValue);
 
         return SkillSetUpdatedDTO.builder().email(personEmail).newValue(skillName+'['+skillValue+']').modifiedDate(now()).build();
     }

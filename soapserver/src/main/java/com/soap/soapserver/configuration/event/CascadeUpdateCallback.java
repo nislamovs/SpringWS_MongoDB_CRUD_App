@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
-import java.time.Instant;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -18,7 +16,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CascadeSaveCallback implements ReflectionUtils.FieldCallback {
+public class CascadeUpdateCallback implements ReflectionUtils.FieldCallback {
 
     private Object source;
     private MongoOperations mongoOperations;
@@ -26,7 +24,7 @@ public class CascadeSaveCallback implements ReflectionUtils.FieldCallback {
     @Override
     public void doWith(final Field field) throws IllegalArgumentException, IllegalAccessException {
         ReflectionUtils.makeAccessible(field);
-
+        System.out.println(">>>>>>>>>>>>>>>>>>>>..   update");
         if (field.isAnnotationPresent(DBRef.class) && field.isAnnotationPresent(Cascade.class)) {
             final Object fieldValue = field.get(source);
 
@@ -34,12 +32,11 @@ public class CascadeSaveCallback implements ReflectionUtils.FieldCallback {
                 FieldCallback callback = new FieldCallback();
                 final CascadeType cascadeType = field.getAnnotation(Cascade.class).value();
 
-                if (cascadeType.equals(CascadeType.SAVE) || cascadeType.equals(CascadeType.ALL)) {
+                if (cascadeType.equals(CascadeType.UPDATE) || cascadeType.equals(CascadeType.ALL)) {
                     if (fieldValue instanceof Collection<?>) {
                         ((Collection<?>) fieldValue).forEach(mongoOperations::save);
                     } else {
                         ReflectionUtils.doWithFields(fieldValue.getClass(), callback);
-                        System.out.println("Field value : " + fieldValue);
                         mongoOperations.save(fieldValue);
                     }
                 }

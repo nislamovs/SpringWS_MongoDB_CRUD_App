@@ -4,7 +4,9 @@ package com.soap.soapserver.repository;
 import com.soap.soapserver.domain.dto.PersonDTO;
 import com.soap.soapserver.models.PersonDAO;
 import org.springframework.data.mongodb.repository.Aggregation;
+import org.springframework.data.mongodb.repository.CountQuery;
 import org.springframework.data.mongodb.repository.DeleteQuery;
+import org.springframework.data.mongodb.repository.ExistsQuery;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -66,7 +68,7 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
     })
     Optional<PersonDAO> findFullPersonInfoByEmail(String email);
 
-    @Query(value = "{name: ?0, surname: ?1}",
+    @Query(value = "{'name': {$regex: ?0, $options: 'i' }, 'surname': {$regex: ?1, $options: 'i'}}",
             fields = "{_id:1," +
                     " name:1," +
                     " surname:1," +
@@ -86,7 +88,7 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
 //            "{$unwind: {path: $skillSet, preserveNullAndEmptyArrays: true}}",
 //            "{$lookup: {from: stats,  localField: stats,        foreignField: _id,    as: stats}}",
 //            "{$unwind: {path: $stats, preserveNullAndEmptyArrays: true}}",
-            "{$match : {name: ?0, surname: ?1}}"
+            "{$match : {'name': {$regex: ?0, $options: 'i' }, 'surname': {$regex: ?1, $options: 'i'}} }"
     })
     Optional<PersonDAO> findFullPersonInfoByNameAndSurname(String firstname, String lastname);
 
@@ -118,12 +120,16 @@ public interface PersonsRepository extends MongoRepository<PersonDAO, String> {
     @DeleteQuery(value="{'_id' : 'ObjectId(\"?0\")'}")
     void deletePersonById(String id);
 
+    @ExistsQuery(value = "{'name': {$regex: ?0, $options: 'i' }, 'surname': {$regex: ?1, $options: 'i'}}")
+    boolean existByNameSurname(String firstname, String lastname);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    @Query("{ 'email' : ?0 }")
-//    Optional<PersonDAO> findPersonByEmail(String email);
-//
-//
-//    @Query(value = "{firstname: ?0, lastname: ?1}")
-//    Optional<PersonDAO> findPersonByNameAndSurname(String firstname, String lastname);
+    @ExistsQuery(value = "{'email': {$regex: ?0, $options: 'i' }}")
+    boolean existByEmail(String email);
+
+    @CountQuery(value = "{}")
+    int personsCount();
+
+    @CountQuery(value = "{'email': {$regex : \".*?0.*\"}}")
+    int emailDomainCountByEmailProviderName(String emailProvider);
+
 }

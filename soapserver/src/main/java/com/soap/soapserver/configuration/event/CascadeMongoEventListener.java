@@ -1,6 +1,7 @@
 package com.soap.soapserver.configuration.event;
 
 import com.soap.soapserver.models.PersonDAO;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
@@ -9,6 +10,8 @@ import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 import org.springframework.data.mongodb.core.mapping.event.BeforeDeleteEvent;
 import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
+import java.time.Instant;
 import java.util.Objects;
 
 public class CascadeMongoEventListener extends AbstractMongoEventListener<PersonDAO> {
@@ -17,14 +20,14 @@ public class CascadeMongoEventListener extends AbstractMongoEventListener<Person
     private MongoOperations mongoOperations;
     private PersonDAO personDAO;
 
-    public @Override
-    void onBeforeDelete(BeforeDeleteEvent<PersonDAO> event) {
+    @Override
+    public void onBeforeDelete(BeforeDeleteEvent<PersonDAO> event) {
         final Object id = Objects.requireNonNull(event.getDocument()).get("_id");
         personDAO = mongoOperations.findById(id, PersonDAO.class);
     }
 
-    public @Override
-    void onAfterDelete(AfterDeleteEvent<PersonDAO> event) {
+    @Override
+    public void onAfterDelete(AfterDeleteEvent<PersonDAO> event) {
         ReflectionUtils.doWithFields(PersonDAO.class, new CascadeDeleteCallback(personDAO, mongoOperations));
     }
 

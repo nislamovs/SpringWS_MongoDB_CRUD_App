@@ -17,5 +17,6 @@ import lombok.experimental.SuperBuilder;
 public class QuestStatusUpdatedDTO extends AbstractDTO {
 
     private String email;
-    private String newValue;
+    private String questName;
+    private String status;
 }
