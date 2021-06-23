@@ -26,6 +26,6 @@ public class SkillSetController {
                                               @RequestParam("skillName") @NotBlank String skillName,
                                               @RequestParam("skillValue") @NotBlank String skillValue) {
 
-        return ok(skillsService.updateSkillValue(email, skillName, parseInt(skillValue)));
+        return ok(skillsService.updateSkillValue(email, skillName, skillValue));
     }
 }

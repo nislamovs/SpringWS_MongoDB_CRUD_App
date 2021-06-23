@@ -3,7 +3,6 @@
 ### Stack:
 * Java8, Springboot, Lombok, Spring Webservices, SOAP/REST
 * SpringData, MongoDB (embedded mongo), mongoTrek
-//* Stored procedures, functions, triggers, etc.
 * Docker-compose
 * Mutual authentication
 

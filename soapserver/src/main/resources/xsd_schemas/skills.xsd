@@ -1,0 +1,27 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="https://localhost:8443/api/v1/ws/skills"
+           targetNamespace="https://localhost:8443/api/v1/ws/skills"
+           elementFormDefault="qualified"
+>
+
+    <xs:element name="updateSkillValueRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="email" type="xs:string"/>
+                <xs:element name="skillName" type="xs:string"/>
+                <xs:element name="skillValue" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateSkillValueResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="email" type="xs:string"/>
+                <xs:element name="newValue" type="xs:string"/>
+                <xs:element name="timestamp" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

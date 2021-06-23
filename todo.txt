@@ -86,9 +86,8 @@ Database:                                                                       
 - Mongo converters                                                                                                  OK
 - create them static                                                                                                NOT NEEDED
 
-- SOAP endpoints                                                                                                    --
-- Endpoints validation                                                                                              --
-- REST Endpoints  (server)                                                                                          --
+- SOAP endpoints                                                                                                    OK
+- REST Endpoints  (server)                                                                                          OK
 - REST Endpoints  (client)                                                                                          --
 - Exception handling  (REST)                                                                                        NOT NEEDED
 - Exception handling  (SOAP)                                                                                        --
@@ -109,7 +108,7 @@ Test this :
 -- create validation for rest dto's (@Valid, @Validated)                                                            --
 -- create search in db ignoring case (firstname, lastname)                                                          OK
 -- implement mongodb requests for quests, skills, stats in java                                                     OK
--- split persons.xsd to quests, skills, stats xsd schemas                                                           --
+-- split persons.xsd to quests, skills, stats xsd schemas                                                           OK
 
 -- use @exists query                                                                                                OK
   -- exists by name, surname                                                                                        OK

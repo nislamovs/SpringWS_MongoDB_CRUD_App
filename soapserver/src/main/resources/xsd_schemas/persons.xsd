@@ -5,6 +5,24 @@
 
 <!--    Requests-->
 
+    <xs:element name="personCountRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="emailProvider" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="isExistsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personName" type="xs:string"/>
+                <xs:element name="personSurname" type="xs:string"/>
+                <xs:element name="personEmail" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="getPartialPersonByIdRequest">
         <xs:complexType>
             <xs:sequence>
@@ -98,6 +116,26 @@
     </xs:element>
 
     <!--    Responses-->
+
+    <xs:element name="personCountResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="searchCriteria" type="xs:string"/>
+                <xs:element name="count" type="xs:int"/>
+                <xs:element name="timestamp" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="isExistsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="searchCriteria" type="xs:string"/>
+                <xs:element name="isExists" type="xs:boolean"/>
+                <xs:element name="timestamp" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="statusResponse">
         <xs:complexType>

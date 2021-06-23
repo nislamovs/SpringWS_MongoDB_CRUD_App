@@ -79,23 +79,53 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		return wsdl11Definition;
 	}
 
-//	@Bean(name = "stats")
-//	public DefaultWsdl11Definition statsWsdlDefinition(XsdSchema statsSchema, WsClientProperties wsClientProperties) {
-//		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-//		wsdl11Definition.setPortTypeName("StatsPort");
-//		wsdl11Definition.setLocationUri(wsClientProperties.getPathPrefix() + "/stats");
-//		wsdl11Definition.setTargetNamespace(wsClientProperties.getTargetNamespace() + "/stats");
-//		wsdl11Definition.setSchema(statsSchema);
-//		return wsdl11Definition;
-//	}
+		@Bean(name = "quests")
+	public DefaultWsdl11Definition questsWsdlDefinition(XsdSchema questsSchema, WsClientProperties wsClientProperties) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("QuestsPort");
+		wsdl11Definition.setLocationUri(wsClientProperties.getPathPrefix() + "/quests");
+		wsdl11Definition.setTargetNamespace(wsClientProperties.getTargetNamespace() + "/quests");
+		wsdl11Definition.setSchema(questsSchema);
+		return wsdl11Definition;
+	}
+
+	@Bean(name = "skills")
+	public DefaultWsdl11Definition skillsWsdlDefinition(XsdSchema skillsSchema, WsClientProperties wsClientProperties) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("SkillsPort");
+		wsdl11Definition.setLocationUri(wsClientProperties.getPathPrefix() + "/skills");
+		wsdl11Definition.setTargetNamespace(wsClientProperties.getTargetNamespace() + "/skills");
+		wsdl11Definition.setSchema(skillsSchema);
+		return wsdl11Definition;
+	}
+
+	@Bean(name = "stats")
+	public DefaultWsdl11Definition statsWsdlDefinition(XsdSchema statsSchema, WsClientProperties wsClientProperties) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("StatsPort");
+		wsdl11Definition.setLocationUri(wsClientProperties.getPathPrefix() + "/stats");
+		wsdl11Definition.setTargetNamespace(wsClientProperties.getTargetNamespace() + "/stats");
+		wsdl11Definition.setSchema(statsSchema);
+		return wsdl11Definition;
+	}
 
 	@Bean
 	public XsdSchema personsSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("xsd_schemas/persons.xsd"));
 	}
 
-//	@Bean
-//	public XsdSchema statsSchema() {
-//		return new SimpleXsdSchema(new ClassPathResource("xsd_schemas/stats.xsd"));
-//	}
+	@Bean
+	public XsdSchema questsSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("xsd_schemas/quests.xsd"));
+	}
+
+	@Bean
+	public XsdSchema skillsSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("xsd_schemas/skills.xsd"));
+	}
+
+	@Bean
+	public XsdSchema statsSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("xsd_schemas/stats.xsd"));
+	}
 }
