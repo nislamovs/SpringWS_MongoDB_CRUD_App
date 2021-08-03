@@ -104,6 +104,9 @@ Test this :
 
 - @Action soap annotation                                                                                           --
 - @SoapHeader                                                                                                       --
+- Create logging interceptors for requests and responses                                                            --
+- @SoapFault                                                                                                        --
+- Custom exception handler                                                                                          --
 
 -- create validation for rest dto's (@Valid, @Validated)                                                            --
 -- create search in db ignoring case (firstname, lastname)                                                          OK
